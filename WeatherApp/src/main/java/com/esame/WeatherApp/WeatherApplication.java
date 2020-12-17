@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 
  * @author Riccardo Vico
+ * @author Riccardo Malpiedi
  *
  */
 
