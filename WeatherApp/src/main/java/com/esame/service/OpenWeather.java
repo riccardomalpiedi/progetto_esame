@@ -14,15 +14,40 @@ import com.esame.model.City;
 
 public class OpenWeather {
 	
-	private ArrayList<City> arrayCities = new ArrayList<>();
-	
 	/**
 	 * 
 	 * @param box di coordinate
-	 * @return jsonarray contenente info attuali su città interne al box
+	 * @return JSONarray contenente info attuali su città interne al box
 	 */
+	@SuppressWarnings("unchecked")
 	public JSONArray downloadArray(String box) {
+		String result = downloadJSON(box);
 		JSONArray jsonArrayCities = new JSONArray();
+		try {
+			JSONObject obj = (JSONObject) JSONValue.parseWithException(result.toString());
+			JSONArray obj_Array = (JSONArray) obj.get("list");
+			for(Object o : obj_Array) {
+				if (o instanceof JSONObject) {
+			    	JSONObject o1 = (JSONObject)o;
+			    	String name = (String)o1.get("name");
+			    	long date = Long.parseLong(o1.get("dt").toString());
+			    	JSONObject o2 = (JSONObject)o1.get("wind");
+			    	double speed = Double.parseDouble(o2.get("speed").toString());
+			    	int deg = Integer.parseInt(o2.get("deg").toString());
+			    	JSONObject o3 = (JSONObject)o1.get("clouds");
+			    	double clouds = Double.parseDouble(o3.get("today").toString());
+			    	City city = new City(name, speed, deg, clouds, date);
+			    	jsonArrayCities.add(city.getJsonObject());
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonArrayCities;
+			
+	}
+	
+	public static String downloadJSON(String box) {
 		String API_KEY = "06a4865d9759cde0491b4e2fccc9f266";
 		String COORDINATES = box;
 		String urlString = "http://api.openweathermap.org/data/2.5/box/city?bbox=" + COORDINATES
@@ -40,29 +65,7 @@ public class OpenWeather {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		try {
-			JSONObject obj = (JSONObject) JSONValue.parseWithException(result.toString());
-			JSONArray obj_Array = (JSONArray) obj.get("list");
-			for(Object o : obj_Array) {
-				if (o instanceof JSONObject) {
-			    	JSONObject o1 = (JSONObject)o;
-			    	String name = (String)o1.get("name");
-			    	long date = Long.parseLong(o1.get("dt").toString());
-			    	JSONObject o2 = (JSONObject)o1.get("wind");
-			    	double speed = Double.parseDouble(o2.get("speed").toString());
-			    	int deg = Integer.parseInt(o2.get("deg").toString());
-			    	JSONObject o3 = (JSONObject)o1.get("clouds");
-			    	double clouds = Double.parseDouble(o3.get("today").toString());
-			    	City city = new City(name, speed, deg, clouds, date);
-			    	arrayCities.add(city);
-			    	jsonArrayCities.add(city.getJsonObject());
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return jsonArrayCities;
-			
+		return result.toString();
 	}
 	
 	

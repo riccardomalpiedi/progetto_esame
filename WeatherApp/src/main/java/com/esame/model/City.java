@@ -19,14 +19,19 @@ public class City {
 		this.date = date;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public JSONObject getJsonObject() {
 		JSONObject obj = new JSONObject();
 		obj.put("name", this.name);
 		obj.put("speed", this.speed);
-		obj.put("deg", this.getDeg());
-		obj.put("clouds", this.getClouds());
-		obj.put("date", this.getDate());
+		obj.put("deg", this.deg);
+		obj.put("clouds", this.clouds);
+		obj.put("date", this.date);
 		return obj;
+	}
+	
+	public String toString() {
+		return (name + ',' + speed + ',' + deg + ',' + deg + ',' + clouds + ',' + date + '\n');
 	}
 
 	/**
