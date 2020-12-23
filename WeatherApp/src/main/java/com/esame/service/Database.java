@@ -17,10 +17,14 @@ import com.esame.model.City;
 public class Database { 
 	private final String box = "13,43,14,44,10";
 	
+	/**
+	 * 
+	 * metodo che esegue chiamata all'API ogni due ore e salva i dati utili in un file CSV
+	 */
 	@Scheduled(fixedRateString = "PT2H")
 	public void download() {
 		ArrayList<City> arrayCities = new ArrayList<>();
-		String result = OpenWeather.downloadJSON(box);
+		String result = OpenWeather.API_Call(box);
 		try {
 			JSONObject obj = (JSONObject) JSONValue.parseWithException(result.toString());
 			JSONArray obj_Array = (JSONArray) obj.get("list");

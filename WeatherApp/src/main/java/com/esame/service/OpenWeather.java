@@ -15,13 +15,13 @@ import com.esame.model.City;
 public class OpenWeather {
 	
 	/**
-	 * 
+	 * metodo che esegue chiamata all'API e jsonparsing
 	 * @param box di coordinate
 	 * @return JSONarray contenente info attuali su città interne al box
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONArray downloadArray(String box) {
-		String result = downloadJSON(box);
+		String result = API_Call(box);
 		JSONArray jsonArrayCities = new JSONArray();
 		try {
 			JSONObject obj = (JSONObject) JSONValue.parseWithException(result.toString());
@@ -47,7 +47,12 @@ public class OpenWeather {
 			
 	}
 	
-	public static String downloadJSON(String box) {
+	/**
+	 * metodo static che esegue chiamata all'API e salva contenuto in una stringa
+	 * @param box di coordinate
+	 * @return stringa contenente il json
+	 */
+	public static String API_Call(String box) {
 		String API_KEY = "06a4865d9759cde0491b4e2fccc9f266";
 		String COORDINATES = box;
 		String urlString = "http://api.openweathermap.org/data/2.5/box/city?bbox=" + COORDINATES
