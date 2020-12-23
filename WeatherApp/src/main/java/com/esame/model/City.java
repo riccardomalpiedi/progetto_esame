@@ -2,8 +2,6 @@ package com.esame.model;
 
 import org.json.simple.JSONObject;
 
-import com.fasterxml.jackson.databind.node.IntNode;
-
 public class City {
 	private String name;
 	private double speed;
