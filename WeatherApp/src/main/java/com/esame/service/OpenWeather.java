@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -31,7 +33,8 @@ public class OpenWeather {
 				if (o instanceof JSONObject) {
 			    	JSONObject o1 = (JSONObject)o;
 			    	String name = (String)o1.get("name");
-			    	long date = Long.parseLong(o1.get("dt").toString());
+			    	long dateInEpoch = Long.parseLong(o1.get("dt").toString());
+			    	LocalDateTime date = LocalDateTime.ofEpochSecond(dateInEpoch, 0, OffsetDateTime.now().getOffset());
 			    	JSONObject o2 = (JSONObject)o1.get("wind");
 			    	double speed = Double.parseDouble(o2.get("speed").toString());
 			    	int deg = Integer.parseInt(o2.get("deg").toString());

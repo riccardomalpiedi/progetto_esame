@@ -1,5 +1,7 @@
 package com.esame.model;
 
+import java.time.LocalDateTime;
+
 import org.json.simple.JSONObject;
 
 public class City {
@@ -7,9 +9,9 @@ public class City {
 	private double speed;
 	private int deg;
 	private double clouds;
-	private long date;
+	private LocalDateTime date;
 	
-	public City(String name, double speed, int deg, double clouds, long date) {
+	public City(String name, double speed, int deg, double clouds, LocalDateTime date) {
 		this.name = name;
 		this.speed = speed;
 		this.deg = deg;
@@ -91,14 +93,14 @@ public class City {
 	/**
 	 * @return the date
 	 */
-	public long getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
 	/**
 	 * @param date the date to set
 	 */
-	public void setDate(long date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	

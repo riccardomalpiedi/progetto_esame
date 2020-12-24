@@ -3,6 +3,8 @@ package com.esame.service;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
@@ -32,7 +34,9 @@ public class Database {
 				if (o instanceof JSONObject) {
 			    	JSONObject o1 = (JSONObject)o;
 			    	String name = (String)o1.get("name");
-			    	long date = Long.parseLong(o1.get("dt").toString());
+			    	long dateInEpoch = Long.parseLong(o1.get("dt").toString());
+			    	LocalDateTime date = LocalDateTime.ofEpochSecond(dateInEpoch,
+			    			                                   0, OffsetDateTime.now().getOffset());
 			    	JSONObject o2 = (JSONObject)o1.get("wind");
 			    	double speed = Double.parseDouble(o2.get("speed").toString());
 			    	int deg = Integer.parseInt(o2.get("deg").toString());
