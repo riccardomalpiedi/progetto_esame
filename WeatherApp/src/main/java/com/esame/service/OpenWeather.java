@@ -27,7 +27,7 @@ public class OpenWeather {
 		String result = API_Call(box);
 		JSONArray jsonArrayCities = new JSONArray();
 		try {
-			JSONObject obj = (JSONObject) JSONValue.parseWithException(result.toString());
+			JSONObject obj = (JSONObject) JSONValue.parseWithException(result);
 			JSONArray obj_Array = (JSONArray) obj.get("list");
 			for(Object o : obj_Array) {
 				if (o instanceof JSONObject) {

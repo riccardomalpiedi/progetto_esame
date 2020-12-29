@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.json.simple.JSONObject;
 
-public class City {
+public class City implements Comparable<City> {
 	private String name;
 	private double speed;
 	private int deg;
@@ -17,6 +17,18 @@ public class City {
 		this.deg = deg;
 		this.clouds = clouds;
 		this.date = date;
+	}
+	
+	@Override
+	public int compareTo(City city) {
+		if (getDate().isBefore(city.getDate())) {
+			return -1;
+		}
+		if (getDate().isAfter(city.getDate())) {
+			return 1;
+		}
+		else
+			return 0;
 	}
 	
 	@SuppressWarnings("unchecked")

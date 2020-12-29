@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -28,7 +29,7 @@ public class Database {
 		ArrayList<City> arrayCities = new ArrayList<>();
 		String result = OpenWeather.API_Call(box);
 		try {
-			JSONObject obj = (JSONObject) JSONValue.parseWithException(result.toString());
+			JSONObject obj = (JSONObject) JSONValue.parseWithException(result);
 			JSONArray obj_Array = (JSONArray) obj.get("list");
 			for(Object o : obj_Array) {
 				if (o instanceof JSONObject) {
@@ -49,6 +50,7 @@ public class Database {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		Collections.sort(arrayCities);
 		File file = new File("prova.csv");
 		try {
 			if(!file.exists()) 
