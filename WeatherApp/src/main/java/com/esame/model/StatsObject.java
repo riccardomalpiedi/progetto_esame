@@ -1,6 +1,10 @@
 package com.esame.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import org.json.simple.JSONObject;
 
 public class StatsObject {
 	
@@ -8,9 +12,39 @@ public class StatsObject {
 	private String maxCity;
 	private String minCity;
 	private String maxVarianceCity;
-	private String StatsType;
+	private String statsType;
 	private String period;
 	
+	public StatsObject(ArrayList<Stats> arrayStats, String statsType, String period) {
+		this.arrayStats = arrayStats;
+		this.statsType = statsType;
+		this.period = period;
+		Comparator<Stats> comparatorAverage = new Comparator<Stats>() {
+			public int compare(Stats s1, Stats s2) {
+	            return (int) (s1.getAverage() - s2.getAverage());
+	        }
+	    };
+	    maxCity = Collections.max(arrayStats, comparatorAverage).getName();
+	    minCity = Collections.min(arrayStats, comparatorAverage).getName();
+	    Comparator<Stats> comparatorVariance = new Comparator<Stats>() {
+			public int compare(Stats s1, Stats s2) {
+	            return (int) (s1.getVariance() - s2.getVariance());
+	        }
+	    };
+	    maxVarianceCity = Collections.max(arrayStats, comparatorVariance).getName();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONObject getJsonObject() {
+		JSONObject obj = new JSONObject();
+		obj.put("Statistiche", arrayStats);
+		obj.put("Città con media più alta", maxCity);
+		obj.put("Città con media più bassa", minCity);
+		obj.put("Città con varianza massima", maxVarianceCity);
+		obj.put("tipo", statsType);
+		obj.put("periodo", period);
+		return obj;
+	}
 	
 	/**
 	 * @return the arrayStats
@@ -64,13 +98,13 @@ public class StatsObject {
 	 * @return the statsType
 	 */
 	public String getStatsType() {
-		return StatsType;
+		return statsType;
 	}
 	/**
 	 * @param statsType the statsType to set
 	 */
 	public void setStatsType(String statsType) {
-		StatsType = statsType;
+		this.statsType = statsType;
 	}
 	/**
 	 * @return the period

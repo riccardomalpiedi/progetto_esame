@@ -16,4 +16,9 @@ public class Controller {
 	public JSONArray getActualData(@RequestParam String box) {
 		return openWeather.downloadArray(box);
 	}
+	
+	@GetMapping("/Stats")
+	public JSONArray getStats(@RequestParam String type, @RequestParam int period) {
+		return openWeather.StatsService(type, period);
+	}
 }

@@ -2,9 +2,17 @@ package com.esame.model;
 
 public class Stats {
 	
+	private String name;
 	private double average;
 	private double variance;
-	private String name;
+	
+	public Stats(String name, double average, double variance) {
+		this.name = name;
+		this.average = average;
+		this.variance = variance;
+	}
+	
+	public Stats() {}
 	
 	/**
 	 * @return the name

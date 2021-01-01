@@ -1,18 +1,29 @@
 package com.esame.service;
 
+import static org.hamcrest.CoreMatchers.containsStringIgnoringCase;
+
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.stereotype.Service;
 
+import com.esame.filter.FilterByName;
+import com.esame.filter.FilterByPeriod;
 import com.esame.model.City;
+import com.esame.model.Stats;
+import com.esame.model.StatsObject;
+import com.esame.stats.StatsClouds;
+import com.esame.stats.StatsInterface;
+import com.esame.stats.StatsSpeed;
 
 @Service
 public class OpenWeather {
@@ -49,6 +60,71 @@ public class OpenWeather {
 		}
 		return jsonArrayCities;
 			
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONArray StatsService(String type, int period) {
+		JSONArray jsonArrayStatsObjects = new JSONArray();
+		ArrayList<City> arrayCities = new ArrayList<>();
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader("prova.csv"));
+			String line;
+			while((line = bufferedReader.readLine()) != null) {
+				String[] fields = line.split(",");
+				String name = fields[0];
+				double speed = Double.parseDouble(fields[1]);
+				int deg = Integer.parseInt(fields[2]);
+				double clouds = Double.parseDouble(fields[3]);
+				LocalDateTime date = LocalDateTime.parse(fields[4]);
+				City city = new City(name, speed, deg, clouds, date);
+				arrayCities.add(city);
+			}
+			bufferedReader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(arrayCities);
+		FilterByPeriod filterByPeriod = new FilterByPeriod(arrayCities, period);
+		while(!filterByPeriod.getArrayCities().isEmpty() && filterByPeriod.getArrayCities() != null) {
+			ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
+			arrayCitiesFiltered = filterByPeriod.filter();
+			String periodOfDatas = "da " + arrayCitiesFiltered.get(0).getDate().toString() + " a " + 
+			                       arrayCitiesFiltered.get(arrayCitiesFiltered.size() - 1).getDate().toString();
+			FilterByName filterByName = new FilterByName(arrayCitiesFiltered);
+			ArrayList<Stats> arrayStats = new ArrayList<>();
+			ArrayList<City> arrayCitiesFiltered2 = new ArrayList<>();
+			System.out.println(arrayCities);
+			System.out.println(arrayCitiesFiltered);
+			switch (type) {
+			case "Clouds" :
+			case "clouds" :
+				while(!filterByName.getArrayCities().isEmpty() && filterByName.getArrayCities() != null) {
+					arrayCitiesFiltered2 = filterByName.filter();
+					StatsClouds statsClouds = new StatsClouds(arrayCitiesFiltered2);
+					Stats stats = statsClouds.calculate();
+					stats.setName(arrayCitiesFiltered2.get(0).getName());
+					arrayStats.add(stats);
+				}
+				StatsObject statsObject = new StatsObject(arrayStats, "nuvolosità", periodOfDatas);
+				jsonArrayStatsObjects.add(statsObject.getJsonObject());
+				break;
+			case "Wind":
+			case "wind":
+				while(!filterByName.getArrayCities().isEmpty() && filterByName.getArrayCities() != null) {
+					arrayCitiesFiltered = filterByName.filter();
+					StatsSpeed statsSpeed = new StatsSpeed(arrayCitiesFiltered2);
+					Stats stats = statsSpeed.calculate();
+					stats.setName(arrayCitiesFiltered2.get(0).getName());
+					arrayStats.add(stats);
+				}
+				StatsObject statsObject2 = new StatsObject(arrayStats, "velocità del vento", periodOfDatas);
+				jsonArrayStatsObjects.add(statsObject2.getJsonObject());
+				break;
+			}
+			
+		}
+		return jsonArrayStatsObjects;
 	}
 	
 	/**
