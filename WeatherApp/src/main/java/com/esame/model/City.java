@@ -11,6 +11,15 @@ public class City implements Comparable<City> {
 	private double clouds;
 	private LocalDateTime date;
 	
+	/**
+	 * costruttore
+	 * 
+	 * @param name
+	 * @param speed
+	 * @param deg
+	 * @param clouds
+	 * @param date
+	 */
 	public City(String name, double speed, int deg, double clouds, LocalDateTime date) {
 		this.name = name;
 		this.speed = speed;
