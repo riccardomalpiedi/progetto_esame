@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.esame.service.OpenWeather;
+import com.esame.service.OpenWeatherService;
 
 @RestController
 public class Controller {
-	@Autowired OpenWeather openWeather;
+	@Autowired OpenWeatherService openWeatherService;
 	
 	@GetMapping("/Data")
 	public JSONArray getActualData(@RequestParam String box) {
-		return openWeather.downloadArray(box);
+		return openWeatherService.downloadArray(box);
 	}
 	
 	@GetMapping("/Stats")
 	public JSONArray getStats(@RequestParam String type, @RequestParam int period) {
-		return openWeather.StatsService(type, period);
+		return openWeatherService.StatsService(type, period);
 	}
 }

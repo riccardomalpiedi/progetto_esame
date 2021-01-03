@@ -27,7 +27,7 @@ public class Database {
 	@Scheduled(fixedRateString = "PT2H")
 	public void download() {
 		ArrayList<City> arrayCities = new ArrayList<>();
-		String result = OpenWeather.API_Call(box);
+		String result = OpenWeatherService.API_Call(box);
 		try {
 			JSONObject obj = (JSONObject) JSONValue.parseWithException(result);
 			JSONArray obj_Array = (JSONArray) obj.get("list");

@@ -1,7 +1,5 @@
 package com.esame.service;
 
-import static org.hamcrest.CoreMatchers.containsStringIgnoringCase;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -22,11 +20,10 @@ import com.esame.model.City;
 import com.esame.model.Stats;
 import com.esame.model.StatsObject;
 import com.esame.stats.StatsClouds;
-import com.esame.stats.StatsInterface;
 import com.esame.stats.StatsSpeed;
 
 @Service
-public class OpenWeather {
+public class OpenWeatherService {
 	
 	/**
 	 * metodo che esegue chiamata all'API e jsonparsing
@@ -65,25 +62,8 @@ public class OpenWeather {
 	@SuppressWarnings("unchecked")
 	public JSONArray StatsService(String type, int period) {
 		JSONArray jsonArrayStatsObjects = new JSONArray();
-		ArrayList<City> arrayCities = new ArrayList<>();
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader("prova.csv"));
-			String line;
-			while((line = bufferedReader.readLine()) != null) {
-				String[] fields = line.split(",");
-				String name = fields[0];
-				double speed = Double.parseDouble(fields[1]);
-				int deg = Integer.parseInt(fields[2]);
-				double clouds = Double.parseDouble(fields[3]);
-				LocalDateTime date = LocalDateTime.parse(fields[4]);
-				City city = new City(name, speed, deg, clouds, date);
-				arrayCities.add(city);
-			}
-			bufferedReader.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		ArrayList<City> arrayCities = readCSV();
+
 		System.out.println(arrayCities);
 		FilterByPeriod filterByPeriod = new FilterByPeriod(arrayCities, period);
 		while(!filterByPeriod.getArrayCities().isEmpty() && filterByPeriod.getArrayCities() != null) {
@@ -153,6 +133,27 @@ public class OpenWeather {
 		return result.toString();
 	}
 	
+	public static ArrayList<City> readCSV() {
+		ArrayList<City> arrayCities = new ArrayList<>();
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader("prova.csv"));
+			String line;
+			while((line = bufferedReader.readLine()) != null) {
+				String[] fields = line.split(",");
+				String name = fields[0];
+				double speed = Double.parseDouble(fields[1]);
+				int deg = Integer.parseInt(fields[2]);
+				double clouds = Double.parseDouble(fields[3]);
+				LocalDateTime date = LocalDateTime.parse(fields[4]);
+				City city = new City(name, speed, deg, clouds, date);
+				arrayCities.add(city);
+			}
+			bufferedReader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return arrayCities;
+	}
 	
 	
 	
