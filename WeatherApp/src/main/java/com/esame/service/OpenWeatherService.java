@@ -1,10 +1,5 @@
 package com.esame.service;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -14,13 +9,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.stereotype.Service;
 
-import com.esame.filter.FilterByName;
+
 import com.esame.filter.FilterByPeriod;
 import com.esame.model.City;
-import com.esame.model.Stats;
-import com.esame.model.StatsObject;
-import com.esame.stats.StatsClouds;
-import com.esame.stats.StatsSpeed;
 
 @Service
 public class OpenWeatherService {
@@ -59,8 +50,16 @@ public class OpenWeatherService {
 			
 	}
 	
+	public JSONArray statsService(String type) {
+		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
+		String periodOfDatas = "da " + arrayCities.get(0).getDate().toString() + " a " + 
+                arrayCities.get(arrayCities.size()-1).getDate().toString();
+		return OpenWeatherUtils.statsUtil(arrayCities, type, periodOfDatas);
+		
+	}
+	
 	@SuppressWarnings("unchecked")
-	public JSONArray statsService(String type, int period) {
+	public JSONArray periodicalStatsService(String type, int period) {
 		JSONArray jsonArrayStatsObjects = new JSONArray();
 		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
 		ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
@@ -70,35 +69,7 @@ public class OpenWeatherService {
 			arrayCitiesFiltered = filterByPeriod.filter();
 			String periodOfDatas = "da " + arrayCitiesFiltered.get(0).getDate().toString() + " a " + 
 			                      arrayCitiesFiltered.get(arrayCitiesFiltered.size()-1).getDate().toString();
-			FilterByName filterByName = new FilterByName(arrayCitiesFiltered);
-			ArrayList<Stats> arrayStats = new ArrayList<>();
-			switch (type) {
-			case "Clouds" :
-			case "clouds" :
-				while(!filterByName.getArrayCities().isEmpty() && filterByName.getArrayCities() != null) {
-					arrayCitiesFiltered = filterByName.filter();
-					StatsClouds statsClouds = new StatsClouds(arrayCitiesFiltered);
-					Stats stats = statsClouds.calculate();
-					stats.setName(arrayCitiesFiltered.get(0).getName());
-					arrayStats.add(stats);
-				}
-				StatsObject statsObject = new StatsObject(arrayStats, "nuvolosità", periodOfDatas);
-				jsonArrayStatsObjects.add(statsObject.getJsonObject());
-				break;
-			case "Wind":
-			case "wind":
-				while(!filterByName.getArrayCities().isEmpty() && filterByName.getArrayCities() != null) {
-					arrayCitiesFiltered = filterByName.filter();
-					StatsSpeed statsSpeed = new StatsSpeed(arrayCitiesFiltered);
-					Stats stats = statsSpeed.calculate();
-					stats.setName(arrayCitiesFiltered.get(0).getName());
-					arrayStats.add(stats);
-				}
-				StatsObject statsObject2 = new StatsObject(arrayStats, "velocità del vento", periodOfDatas);
-				jsonArrayStatsObjects.add(statsObject2.getJsonObject());
-				break;
-			}
-			
+			jsonArrayStatsObjects.add(OpenWeatherUtils.statsUtil(arrayCitiesFiltered, type, periodOfDatas));
 		}
 		return jsonArrayStatsObjects;
 	}

@@ -18,7 +18,12 @@ public class Controller {
 	}
 	
 	@GetMapping("/Stats")
+	public JSONArray getStats(@RequestParam String type) {
+		return openWeatherService.statsService(type);
+	}
+	
+	@GetMapping("/PeriodicalStats")
 	public JSONArray getStats(@RequestParam String type, @RequestParam int period) {
-		return openWeatherService.statsService(type, period);
+		return openWeatherService.periodicalStatsService(type, period);
 	}
 }

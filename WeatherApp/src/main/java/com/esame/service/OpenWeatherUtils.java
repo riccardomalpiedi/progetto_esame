@@ -8,7 +8,14 @@ import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+
+import com.esame.filter.FilterByName;
 import com.esame.model.City;
+import com.esame.model.Stats;
+import com.esame.model.StatsObject;
+import com.esame.stats.StatsClouds;
+import com.esame.stats.StatsSpeed;
 
 public class OpenWeatherUtils {
 	
@@ -62,6 +69,60 @@ public class OpenWeatherUtils {
 			e.printStackTrace();
 		}
 		return arrayCities;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONArray statsUtil(ArrayList<City> arrayCities, String type, String periodOfDatas) {
+		JSONArray jsonArrayStatsObjects = new JSONArray();
+		FilterByName filterByName = new FilterByName(arrayCities);
+		ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
+ 		ArrayList<Stats> arrayStats = new ArrayList<>();
+		switch (type) {
+		case "Clouds" :
+		case "clouds" :
+			while(!filterByName.getArrayCities().isEmpty() && filterByName.getArrayCities() != null) {
+				arrayCitiesFiltered = filterByName.filter();
+				StatsClouds statsClouds = new StatsClouds(arrayCitiesFiltered);
+				Stats stats = statsClouds.calculate();
+				stats.setName(arrayCitiesFiltered.get(0).getName());
+				arrayStats.add(stats);
+			}
+			StatsObject statsObject = new StatsObject(arrayStats, "nuvolosità", periodOfDatas);
+			jsonArrayStatsObjects.add(statsObject.getJsonObject());
+			break;
+		case "Wind":
+		case "wind":
+			while(!filterByName.getArrayCities().isEmpty() && filterByName.getArrayCities() != null) {
+				arrayCitiesFiltered = filterByName.filter();
+				StatsSpeed statsSpeed = new StatsSpeed(arrayCitiesFiltered);
+				Stats stats = statsSpeed.calculate();
+				stats.setName(arrayCitiesFiltered.get(0).getName());
+				arrayStats.add(stats);
+			}
+			StatsObject statsObject2 = new StatsObject(arrayStats, "velocità del vento", periodOfDatas);
+			jsonArrayStatsObjects.add(statsObject2.getJsonObject());
+			break;
+		case "All":
+		case "all":
+			ArrayList<Stats> arrayStats2 = new ArrayList<>();
+			while(!filterByName.getArrayCities().isEmpty() && filterByName.getArrayCities() != null) {
+				arrayCitiesFiltered = filterByName.filter();
+				StatsClouds statsClouds = new StatsClouds(arrayCitiesFiltered);
+				Stats stats = statsClouds.calculate();
+				stats.setName(arrayCitiesFiltered.get(0).getName());
+				arrayStats.add(stats);
+				StatsSpeed statsSpeed = new StatsSpeed(arrayCitiesFiltered);
+				Stats stats2 = statsSpeed.calculate();
+				stats2.setName(arrayCitiesFiltered.get(0).getName());
+				arrayStats2.add(stats);
+			}
+			StatsObject statsObject3 = new StatsObject(arrayStats, "nuvolosità", periodOfDatas);
+			jsonArrayStatsObjects.add(statsObject3.getJsonObject());
+			StatsObject statsObject4 = new StatsObject(arrayStats2, "velocità del vento", periodOfDatas);
+			jsonArrayStatsObjects.add(statsObject4.getJsonObject());
+			
+		}
+		return jsonArrayStatsObjects;
 	}
 	
 	
