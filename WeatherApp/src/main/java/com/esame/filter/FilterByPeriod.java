@@ -1,7 +1,6 @@
 package com.esame.filter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import com.esame.model.City;
 
@@ -12,7 +11,6 @@ public class FilterByPeriod extends FilterParent implements Filter {
 	public FilterByPeriod(ArrayList<City> arrayCities, int period) {
 		super(arrayCities);
 		this.period = period;
-		Collections.sort(this.arrayCities);
 	}
 	
 	public FilterByPeriod(ArrayList<City> arrayCities) {

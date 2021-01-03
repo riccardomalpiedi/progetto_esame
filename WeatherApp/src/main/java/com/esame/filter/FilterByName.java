@@ -19,7 +19,6 @@ public class FilterByName extends FilterParent implements Filter{
 				arrayCitiesFiltered.add(arrayCities.get(i));
 				arrayCities.remove(i);
 				i--;
-				break;
 			}
 		}
 		return arrayCitiesFiltered;	

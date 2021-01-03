@@ -42,6 +42,7 @@ public class City implements Comparable<City> {
 		return obj;
 	}
 	
+	@Override
 	public String toString() {
 		return (name + ',' + speed + ',' + deg + ',' + clouds + ',' + date + '\n');
 	}

@@ -1,6 +1,7 @@
 package com.esame.filter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.esame.model.City;
 
@@ -10,6 +11,7 @@ public class FilterParent {
 	
 	public FilterParent(ArrayList<City> arrayCities) {
 		this.arrayCities = arrayCities;
+		Collections.sort(this.arrayCities);
 	}
 	
 	/**

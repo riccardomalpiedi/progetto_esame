@@ -31,8 +31,8 @@ public class OpenWeatherService {
 	 * @return JSONarray contenente info attuali su città interne al box
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONArray downloadArray(String box) {
-		String result = API_Call(box);
+	public JSONArray actualDataService(String box) {
+		String result = OpenWeatherUtils.API_Call(box);
 		JSONArray jsonArrayCities = new JSONArray();
 		try {
 			JSONObject obj = (JSONObject) JSONValue.parseWithException(result);
@@ -60,30 +60,26 @@ public class OpenWeatherService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public JSONArray StatsService(String type, int period) {
+	public JSONArray statsService(String type, int period) {
 		JSONArray jsonArrayStatsObjects = new JSONArray();
-		ArrayList<City> arrayCities = readCSV();
+		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
+		ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
 
-		System.out.println(arrayCities);
 		FilterByPeriod filterByPeriod = new FilterByPeriod(arrayCities, period);
 		while(!filterByPeriod.getArrayCities().isEmpty() && filterByPeriod.getArrayCities() != null) {
-			ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
 			arrayCitiesFiltered = filterByPeriod.filter();
 			String periodOfDatas = "da " + arrayCitiesFiltered.get(0).getDate().toString() + " a " + 
-			                       arrayCitiesFiltered.get(arrayCitiesFiltered.size() - 1).getDate().toString();
+			                      arrayCitiesFiltered.get(arrayCitiesFiltered.size()-1).getDate().toString();
 			FilterByName filterByName = new FilterByName(arrayCitiesFiltered);
 			ArrayList<Stats> arrayStats = new ArrayList<>();
-			ArrayList<City> arrayCitiesFiltered2 = new ArrayList<>();
-			System.out.println(arrayCities);
-			System.out.println(arrayCitiesFiltered);
 			switch (type) {
 			case "Clouds" :
 			case "clouds" :
 				while(!filterByName.getArrayCities().isEmpty() && filterByName.getArrayCities() != null) {
-					arrayCitiesFiltered2 = filterByName.filter();
-					StatsClouds statsClouds = new StatsClouds(arrayCitiesFiltered2);
+					arrayCitiesFiltered = filterByName.filter();
+					StatsClouds statsClouds = new StatsClouds(arrayCitiesFiltered);
 					Stats stats = statsClouds.calculate();
-					stats.setName(arrayCitiesFiltered2.get(0).getName());
+					stats.setName(arrayCitiesFiltered.get(0).getName());
 					arrayStats.add(stats);
 				}
 				StatsObject statsObject = new StatsObject(arrayStats, "nuvolosità", periodOfDatas);
@@ -93,9 +89,9 @@ public class OpenWeatherService {
 			case "wind":
 				while(!filterByName.getArrayCities().isEmpty() && filterByName.getArrayCities() != null) {
 					arrayCitiesFiltered = filterByName.filter();
-					StatsSpeed statsSpeed = new StatsSpeed(arrayCitiesFiltered2);
+					StatsSpeed statsSpeed = new StatsSpeed(arrayCitiesFiltered);
 					Stats stats = statsSpeed.calculate();
-					stats.setName(arrayCitiesFiltered2.get(0).getName());
+					stats.setName(arrayCitiesFiltered.get(0).getName());
 					arrayStats.add(stats);
 				}
 				StatsObject statsObject2 = new StatsObject(arrayStats, "velocità del vento", periodOfDatas);
@@ -106,56 +102,6 @@ public class OpenWeatherService {
 		}
 		return jsonArrayStatsObjects;
 	}
-	
-	/**
-	 * metodo static che esegue chiamata all'API e salva contenuto in una stringa
-	 * @param box di coordinate
-	 * @return stringa contenente il json
-	 */
-	public static String API_Call(String box) {
-		String API_KEY = "06a4865d9759cde0491b4e2fccc9f266";
-		String COORDINATES = box;
-		String urlString = "http://api.openweathermap.org/data/2.5/box/city?bbox=" + COORDINATES
-				+ "&appid=" + API_KEY;
-		StringBuilder result = new StringBuilder();
-		try {
-			URL url = new URL(urlString);
-			URLConnection connection = url.openConnection();
-			BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			String line;
-			while((line = rd.readLine()) != null) {
-				result.append(line);
-			}
-			rd.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result.toString();
-	}
-	
-	public static ArrayList<City> readCSV() {
-		ArrayList<City> arrayCities = new ArrayList<>();
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader("prova.csv"));
-			String line;
-			while((line = bufferedReader.readLine()) != null) {
-				String[] fields = line.split(",");
-				String name = fields[0];
-				double speed = Double.parseDouble(fields[1]);
-				int deg = Integer.parseInt(fields[2]);
-				double clouds = Double.parseDouble(fields[3]);
-				LocalDateTime date = LocalDateTime.parse(fields[4]);
-				City city = new City(name, speed, deg, clouds, date);
-				arrayCities.add(city);
-			}
-			bufferedReader.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return arrayCities;
-	}
-	
-	
 	
 	
 }

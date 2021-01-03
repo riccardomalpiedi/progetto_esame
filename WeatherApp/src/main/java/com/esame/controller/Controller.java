@@ -14,11 +14,11 @@ public class Controller {
 	
 	@GetMapping("/Data")
 	public JSONArray getActualData(@RequestParam String box) {
-		return openWeatherService.downloadArray(box);
+		return openWeatherService.actualDataService(box);
 	}
 	
 	@GetMapping("/Stats")
 	public JSONArray getStats(@RequestParam String type, @RequestParam int period) {
-		return openWeatherService.StatsService(type, period);
+		return openWeatherService.statsService(type, period);
 	}
 }

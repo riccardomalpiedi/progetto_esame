@@ -27,7 +27,7 @@ public class Database {
 	@Scheduled(fixedRateString = "PT2H")
 	public void download() {
 		ArrayList<City> arrayCities = new ArrayList<>();
-		String result = OpenWeatherService.API_Call(box);
+		String result = OpenWeatherUtils.API_Call(box);
 		try {
 			JSONObject obj = (JSONObject) JSONValue.parseWithException(result);
 			JSONArray obj_Array = (JSONArray) obj.get("list");
@@ -51,16 +51,15 @@ public class Database {
 			e.printStackTrace();
 		}
 		Collections.sort(arrayCities);
-		File file = new File("prova.csv");
+		File file = new File("storico.csv");
 		try {
 			if(!file.exists()) 
 				file.createNewFile();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(file.getAbsolutePath());
 		try {
-			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("prova.csv", true));
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("storico.csv", true));
 			for(int i = 0; i < arrayCities.size(); i++) {
 				bufferedWriter.write(arrayCities.get(i).toString());
 			}
