@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.esame.filter.FilterByPeriod;
+import com.esame.filter.FilterWeekly;
 import com.esame.model.City;
 
 @Service
@@ -74,5 +75,20 @@ public class OpenWeatherService {
 		return jsonArrayStatsObjects;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public JSONArray weeklyStatsService(String type) {
+		JSONArray jsonArrayStatsObjects = new JSONArray();
+		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
+		ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
+
+		FilterWeekly filterWeekly = new FilterWeekly(arrayCities);
+		while(!filterWeekly.getArrayCities().isEmpty() && filterWeekly.getArrayCities() != null) {
+			arrayCitiesFiltered = filterWeekly.filter();
+			String periodOfDatas = "da " + arrayCitiesFiltered.get(0).getDate().toString() + " a " + 
+			                      arrayCitiesFiltered.get(arrayCitiesFiltered.size()-1).getDate().toString();
+			jsonArrayStatsObjects.add(OpenWeatherUtils.statsUtil(arrayCitiesFiltered, type, periodOfDatas));
+		}
+		return jsonArrayStatsObjects;
+	}
 	
 }

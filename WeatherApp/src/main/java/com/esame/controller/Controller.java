@@ -23,7 +23,14 @@ public class Controller {
 	}
 	
 	@GetMapping("/PeriodicalStats")
-	public JSONArray getStats(@RequestParam String type, @RequestParam int period) {
+	public JSONArray getPeriodicalStats(@RequestParam String type, @RequestParam int period) {
 		return openWeatherService.periodicalStatsService(type, period);
 	}
+	
+	@GetMapping("/WeeklyStats")
+	public JSONArray getWeeklyStats(@RequestParam String type) {
+		return openWeatherService.weeklyStatsService(type);
+	}
 }
+
+
