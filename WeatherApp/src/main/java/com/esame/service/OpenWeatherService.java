@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.esame.filter.FilterByPeriod;
+import com.esame.filter.FilterDaily;
 import com.esame.filter.FilterWeekly;
 import com.esame.model.City;
 
@@ -84,6 +85,22 @@ public class OpenWeatherService {
 		FilterWeekly filterWeekly = new FilterWeekly(arrayCities);
 		while(!filterWeekly.getArrayCities().isEmpty() && filterWeekly.getArrayCities() != null) {
 			arrayCitiesFiltered = filterWeekly.filter();
+			String periodOfDatas = "da " + arrayCitiesFiltered.get(0).getDate().toString() + " a " + 
+			                      arrayCitiesFiltered.get(arrayCitiesFiltered.size()-1).getDate().toString();
+			jsonArrayStatsObjects.add(OpenWeatherUtils.statsUtil(arrayCitiesFiltered, type, periodOfDatas));
+		}
+		return jsonArrayStatsObjects;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONArray dailyStatsService(String type) {
+		JSONArray jsonArrayStatsObjects = new JSONArray();
+		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
+		ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
+
+		FilterDaily filterDaily = new FilterDaily(arrayCities);
+		while(!filterDaily.getArrayCities().isEmpty() && filterDaily.getArrayCities() != null) {
+			arrayCitiesFiltered = filterDaily.filter();
 			String periodOfDatas = "da " + arrayCitiesFiltered.get(0).getDate().toString() + " a " + 
 			                      arrayCitiesFiltered.get(arrayCitiesFiltered.size()-1).getDate().toString();
 			jsonArrayStatsObjects.add(OpenWeatherUtils.statsUtil(arrayCitiesFiltered, type, periodOfDatas));

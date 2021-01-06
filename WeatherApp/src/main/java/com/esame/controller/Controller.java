@@ -31,6 +31,11 @@ public class Controller {
 	public JSONArray getWeeklyStats(@RequestParam String type) {
 		return openWeatherService.weeklyStatsService(type);
 	}
+	
+	@GetMapping("/DailyStats")
+	public JSONArray getDailyStats(@RequestParam String type) {
+		return openWeatherService.dailyStatsService(type);
+	}
 }
 
 
