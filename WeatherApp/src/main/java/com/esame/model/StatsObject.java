@@ -21,14 +21,18 @@ public class StatsObject {
 		this.period = period;
 		Comparator<Stats> comparatorAverage = new Comparator<Stats>() {
 			public int compare(Stats s1, Stats s2) {
-	            return (int) (s1.getAverage() - s2.getAverage());
+	            if(s1.getAverage() > s2.getAverage()) return 1;
+	            if(s1.getAverage() < s2.getAverage()) return -1;
+	            else return 0;
 	        }
 	    };
 	    maxCity = Collections.max(arrayStats, comparatorAverage).getName();
 	    minCity = Collections.min(arrayStats, comparatorAverage).getName();
 	    Comparator<Stats> comparatorVariance = new Comparator<Stats>() {
 			public int compare(Stats s1, Stats s2) {
-	            return (int) (s1.getVariance() - s2.getVariance());
+				 if(s1.getVariance() > s2.getVariance()) return 1;
+		         if(s1.getVariance() < s2.getVariance()) return -1;
+		         else return 0;
 	        }
 	    };
 	    maxVarianceCity = Collections.max(arrayStats, comparatorVariance).getName();
