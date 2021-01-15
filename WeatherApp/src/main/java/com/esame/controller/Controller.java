@@ -3,6 +3,8 @@ package com.esame.controller;
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +37,11 @@ public class Controller {
 	@GetMapping("/DailyStats")
 	public JSONArray getDailyStats(@RequestParam String type) {
 		return openWeatherService.dailyStatsService(type);
+	}
+	
+	@PostMapping("/ChangeBox")
+	public String changeBox(@RequestBody String box) {
+		return openWeatherService.changeBoxService(box);
 	}
 }
 

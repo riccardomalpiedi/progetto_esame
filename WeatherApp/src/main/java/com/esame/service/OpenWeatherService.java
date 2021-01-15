@@ -1,5 +1,12 @@
 package com.esame.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -106,6 +113,52 @@ public class OpenWeatherService {
 			jsonArrayStatsObjects.add(OpenWeatherUtils.statsUtil(arrayCitiesFiltered, type, periodOfDatas));
 		}
 		return jsonArrayStatsObjects;
+	}
+	
+	public String changeBoxService(String box) {
+		
+		String API_KEY = "06a4865d9759cde0491b4e2fccc9f266";
+		String COORDINATES = box;
+		String urlString = "http://api.openweathermap.org/data/2.5/box/city?bbox=" + COORDINATES
+				+ "&appid=" + API_KEY;
+		String line = null;
+		
+		try {
+			URL url = new URL(urlString);
+			URLConnection connection = url.openConnection();
+			BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			line = rd.readLine();
+			rd.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			JSONObject obj = (JSONObject) JSONValue.parseWithException(line);
+			if(obj.get("cod").toString() == "200") {
+				
+				File file = new File("box.txt");
+				try {
+					if(!file.exists())
+						file.createNewFile();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+				try {
+					BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("box.txt"));
+					bufferedWriter.write(box);
+					bufferedWriter.close();
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+				return "si";
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "no no";
 	}
 	
 }

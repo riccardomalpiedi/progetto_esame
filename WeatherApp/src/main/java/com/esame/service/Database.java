@@ -1,7 +1,9 @@
 package com.esame.service;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -18,7 +20,6 @@ import com.esame.model.City;
 
 @Component
 public class Database { 
-	private final String box = "13,43,14,44,10";
 	
 	/**
 	 * 
@@ -26,6 +27,16 @@ public class Database {
 	 */
 	@Scheduled(fixedRateString = "PT2H")
 	public void download() {
+		String box = null;
+		
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader("box.txt"));
+			box = bufferedReader.readLine();
+			bufferedReader.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		ArrayList<City> arrayCities = new ArrayList<>();
 		String result = OpenWeatherUtils.API_Call(box);
 		try {
