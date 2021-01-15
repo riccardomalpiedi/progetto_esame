@@ -1,6 +1,7 @@
 package com.esame.controller;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,8 +41,8 @@ public class Controller {
 	}
 	
 	@PostMapping("/ChangeBox")
-	public String changeBox(@RequestBody String box) {
-		return openWeatherService.changeBoxService(box);
+	public String changeBox(@RequestBody JSONObject box) {
+		return openWeatherService.changeBoxService(box.get("box").toString());
 	}
 }
 

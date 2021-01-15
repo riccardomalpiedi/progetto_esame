@@ -116,27 +116,10 @@ public class OpenWeatherService {
 	}
 	
 	public String changeBoxService(String box) {
-		
-		String API_KEY = "06a4865d9759cde0491b4e2fccc9f266";
-		String COORDINATES = box;
-		String urlString = "http://api.openweathermap.org/data/2.5/box/city?bbox=" + COORDINATES
-				+ "&appid=" + API_KEY;
-		String line = null;
-		
+		String result = OpenWeatherUtils.API_Call(box);
 		try {
-			URL url = new URL(urlString);
-			URLConnection connection = url.openConnection();
-			BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			line = rd.readLine();
-			rd.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			JSONObject obj = (JSONObject) JSONValue.parseWithException(line);
-			if(obj.get("cod").toString() == "200") {
-				
+			JSONObject obj = (JSONObject) JSONValue.parseWithException(result);
+			if(obj.get("cod").toString().equals("200")) {
 				File file = new File("box.txt");
 				try {
 					if(!file.exists())
@@ -149,12 +132,12 @@ public class OpenWeatherService {
 					BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("box.txt"));
 					bufferedWriter.write(box);
 					bufferedWriter.close();
-				}catch (Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				return "si";
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
