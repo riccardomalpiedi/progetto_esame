@@ -4,15 +4,38 @@ import java.time.LocalDateTime;
 
 import org.json.simple.JSONObject;
 
+/**
+ * Classe City
+ * @author Riccardo Malpiedi
+ */
 public class City implements Comparable<City> {
+	/**
+	 * Nome della città
+	 */
 	private String name;
+	
+	/**
+	 * Velocità del vento
+	 */
 	private double speed;
+	
+	/**
+	 * Angolazione del vento
+	 */
 	private int deg;
+	
+	/**
+	 * Nuvolosità
+	 */
 	private double clouds;
+	
+	/**
+	 * Data a cui risalgono i valori
+	 */
 	private LocalDateTime date;
 	
 	/**
-	 * costruttore
+	 * Costruttore della classe City
 	 * 
 	 * @param name
 	 * @param speed
@@ -28,6 +51,11 @@ public class City implements Comparable<City> {
 		this.date = date;
 	}
 	
+	/**
+	 * compareTo che confronta città in base alla data
+	 * 
+	 * @param city
+	 */
 	@Override
 	public int compareTo(City city) {
 		if (getDate().isBefore(city.getDate())) {
@@ -40,6 +68,10 @@ public class City implements Comparable<City> {
 			return 0;
 	}
 	
+	/**
+	 * Metodo che restituisce il JSONObject
+	 * @return obj
+	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject getJsonObject() {
 		JSONObject obj = new JSONObject();
@@ -51,76 +83,89 @@ public class City implements Comparable<City> {
 		return obj;
 	}
 	
+	/**
+	 * metodo toString
+	 */
 	@Override
 	public String toString() {
 		return (name + ',' + speed + ',' + deg + ',' + clouds + ',' + date + '\n');
 	}
 
 	/**
-	 * @return the name
+	 * Getter del nome
+	 * @return name
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name the name to set
+	 * Setter del nome
+	 * @param name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * @return the speed
+	 * Getter della velocità del vento
+	 * @return speed
 	 */
 	public double getSpeed() {
 		return speed;
 	}
 
 	/**
-	 * @param speed the speed to set
+	 * Setter della velocità del vento
+	 * @param speed
 	 */
 	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
 
 	/**
-	 * @return the deg
+	 * Getter dell'angolazione del vento
+	 * @return deg
 	 */
 	public int getDeg() {
 		return deg;
 	}
 
 	/**
-	 * @param deg the deg to set
+	 * Setter dell'angolazione del vento
+	 * @param deg
 	 */
 	public void setDeg(int deg) {
 		this.deg = deg;
 	}
 
 	/**
-	 * @return the clouds
+	 * Getter della nuvolosità
+	 * @return clouds
 	 */
 	public double getClouds() {
 		return clouds;
 	}
 
 	/**
-	 * @param clouds the clouds to set
+	 * Setter della nuvolosità
+	 * @param clouds
 	 */
 	public void setClouds(double clouds) {
 		this.clouds = clouds;
 	}
 
 	/**
-	 * @return the date
+	 * Getter della data
+	 * @return date
 	 */
 	public LocalDateTime getDate() {
 		return date;
 	}
 
 	/**
-	 * @param date the date to set
+	 * Setter della data
+	 * @param date
 	 */
 	public void setDate(LocalDateTime date) {
 		this.date = date;

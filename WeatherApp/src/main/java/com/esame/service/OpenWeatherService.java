@@ -1,12 +1,9 @@
 package com.esame.service;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -14,6 +11,7 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 
@@ -26,9 +24,9 @@ import com.esame.model.City;
 public class OpenWeatherService {
 	
 	/**
-	 * metodo che esegue chiamata all'API e jsonparsing
-	 * @param box di coordinate
-	 * @return JSONarray contenente info attuali su città interne al box
+	 * Metodo che esegue chiamata all'API e jsonparsing
+	 * @param box box di coordinate
+	 * @return info attuali su città interne al box
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONArray actualDataService(String box) {
@@ -42,7 +40,8 @@ public class OpenWeatherService {
 			    	JSONObject o1 = (JSONObject)o;
 			    	String name = (String)o1.get("name");
 			    	long dateInEpoch = Long.parseLong(o1.get("dt").toString());
-			    	LocalDateTime date = LocalDateTime.ofEpochSecond(dateInEpoch, 0, OffsetDateTime.now().getOffset());
+			    	LocalDateTime date = LocalDateTime.ofEpochSecond(dateInEpoch, 0,
+			    			                                         OffsetDateTime.now().getOffset());
 			    	JSONObject o2 = (JSONObject)o1.get("wind");
 			    	double speed = Double.parseDouble(o2.get("speed").toString());
 			    	int deg = Integer.parseInt(o2.get("deg").toString());
@@ -52,13 +51,18 @@ public class OpenWeatherService {
 			    	jsonArrayCities.add(city.getJsonObject());
 				}
 			}
-		} catch (Exception e) {
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		return jsonArrayCities;
 			
 	}
 	
+	/**
+	 * Metodo che legge dati da storico e calcola le statistiche del tipo richiesto
+	 * @param type tipo (es. nuvolosità)
+	 * @return statistiche richieste
+	 */
 	public JSONArray statsService(String type) {
 		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
 		String periodOfDatas = "da " + arrayCities.get(0).getDate().toString() + " a " + 
@@ -67,6 +71,13 @@ public class OpenWeatherService {
 		
 	}
 	
+	/**
+	 * Metodo che legge dati da storico, li filtra secondo la periodicità indicata e
+	 * calcola le statistiche del tipo richiesto
+	 * @param type tipo (es. nuvolosità)
+	 * @param period periodictà espressa in giorni
+	 * @return statistiche rischieste
+	 */
 	@SuppressWarnings("unchecked")
 	public JSONArray periodicalStatsService(String type, int period) {
 		JSONArray jsonArrayStatsObjects = new JSONArray();
@@ -83,6 +94,11 @@ public class OpenWeatherService {
 		return jsonArrayStatsObjects;
 	}
 	
+	/**
+	 * Metodo che legge dati da storico e calcola statistiche settimanali del tipo richiesto
+	 * @param type tipo (es. nuvolosità)
+	 * @return statistiche richieste
+	 */
 	@SuppressWarnings("unchecked")
 	public JSONArray weeklyStatsService(String type) {
 		JSONArray jsonArrayStatsObjects = new JSONArray();
@@ -99,6 +115,11 @@ public class OpenWeatherService {
 		return jsonArrayStatsObjects;
 	}
 	
+	/**
+	 * Metodo che legge dati da storico e calcola statistiche giornaliere del tipo richiesto
+	 * @param type tipo (es. nuvolosità)
+	 * @return statistiche richieste
+	 */
 	@SuppressWarnings("unchecked")
 	public JSONArray dailyStatsService(String type) {
 		JSONArray jsonArrayStatsObjects = new JSONArray();
@@ -115,6 +136,11 @@ public class OpenWeatherService {
 		return jsonArrayStatsObjects;
 	}
 	
+	/**
+	 * Metodo per cambiare il box di coordinate delle città in osservazione
+	 * @param box box box di coordinate
+	 * @return stringa che indica se l'operazione è andata a buon fine
+	 */
 	public String changeBoxService(String box) {
 		String result = OpenWeatherUtils.API_Call(box);
 		try {
@@ -124,7 +150,7 @@ public class OpenWeatherService {
 				try {
 					if(!file.exists())
 						file.createNewFile();
-				} catch(Exception e) {
+				} catch(IOException e) {
 					e.printStackTrace();
 				}
 				
@@ -132,12 +158,12 @@ public class OpenWeatherService {
 					BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("box.txt"));
 					bufferedWriter.write(box);
 					bufferedWriter.close();
-				} catch (Exception e) {
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				return "si";
 			}
-		} catch (Exception e) {
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		

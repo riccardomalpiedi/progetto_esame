@@ -2,6 +2,7 @@ package com.esame.service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -39,7 +40,7 @@ public class OpenWeatherUtils {
 				result.append(line);
 			}
 			rd.close();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return result.toString();
@@ -65,12 +66,19 @@ public class OpenWeatherUtils {
 				arrayCities.add(city);
 			}
 			bufferedReader.close();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return arrayCities;
 	}
 	
+	/**
+	 * metodo che calcola le statistiche
+	 * @param arrayCities città di cui si voglioni calcolare le statistiche
+	 * @param type tipo (es. nuvolosita')
+	 * @param periodOfDatas periodo a cui si riferiscono i dati
+	 * @return statistiche richieste
+	 */
 	@SuppressWarnings("unchecked")
 	public static JSONArray statsUtil(ArrayList<City> arrayCities, String type, String periodOfDatas) {
 		JSONArray jsonArrayStatsObjects = new JSONArray();

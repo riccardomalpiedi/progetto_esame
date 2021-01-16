@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.Collections;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.json.simple.parser.ParseException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -28,12 +30,11 @@ public class Database {
 	@Scheduled(fixedRateString = "PT2H")
 	public void download() {
 		String box = null;
-		
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader("box.txt"));
 			box = bufferedReader.readLine();
 			bufferedReader.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -58,7 +59,7 @@ public class Database {
 			    	arrayCities.add(city);
 				}
 			}
-		} catch (Exception e) {
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		Collections.sort(arrayCities);
@@ -66,7 +67,7 @@ public class Database {
 		try {
 			if(!file.exists()) 
 				file.createNewFile();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -75,7 +76,7 @@ public class Database {
 				bufferedWriter.write(arrayCities.get(i).toString());
 			}
 			bufferedWriter.close();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		} 
 	}
