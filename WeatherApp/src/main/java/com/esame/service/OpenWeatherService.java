@@ -161,13 +161,13 @@ public class OpenWeatherService {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				return "si";
+				return "Operazione Eseguita con Successo";
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
-		return "no no";
+		return "Box di coordinate non valido";
 	}
 	
 }

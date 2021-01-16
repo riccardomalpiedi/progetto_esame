@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.json.simple.JSONArray;
 
@@ -26,10 +27,15 @@ public class OpenWeatherUtils {
 	 * @return stringa contenente il json
 	 */
 	public static String API_Call(String box) {
-		String API_KEY = "06a4865d9759cde0491b4e2fccc9f266";
+		String API_KEY = null;
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader("APIKey.txt"))) {
+			API_KEY = bufferedReader.readLine();
+		}catch (IOException e){
+			e.printStackTrace();
+		}
 		String COORDINATES = box;
 		String urlString = "http://api.openweathermap.org/data/2.5/box/city?bbox=" + COORDINATES
-				+ "&appid=" + API_KEY;
+				+ ",10&appid=" + API_KEY;
 		StringBuilder result = new StringBuilder();
 		try {
 			URL url = new URL(urlString);
@@ -68,7 +74,8 @@ public class OpenWeatherUtils {
 			bufferedReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
+		Collections.sort(arrayCities);
 		return arrayCities;
 	}
 	
