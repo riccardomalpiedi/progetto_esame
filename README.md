@@ -1,21 +1,24 @@
 # Progetto esame
 
 # Descrizione del progetto:
-Il progetto un servizio meteo che, scegliendo un box di coordinate geografiche, permette di ottenere tutte le informazioni relative al vento e alla nuvolosità delle città interne al box. Il servizio, una volta avviato, salva informazioni ogni due ore riguardo alle città interne a un box di coordinate che è già stato impostato ma può essere modificato attraverso la rotta apposita. Le informazioni saranno salvante nello storico (un file CSV).
+Il progetto implementa un servizio meteo che, scegliendo un box di coordinate geografiche, permette di ottenere tutte le informazioni relative al vento e alla nuvolosità delle città interne al box. Il servizio, una volta avviato, salva informazioni ogni due ore riguardo alle città interne a un box di coordinate che è già stato impostato ma può essere modificato attraverso la rotta apposita. Le informazioni saranno salvante nello storico (un file CSV).
 È possiblie ottenere statistiche riguardanti la velocità del vento e la nuvolosità calcolate sui dati presenti nello storico. Queste statistiche possono essere filtrate in base alla periodicità, quindi è possibile ottenere statistiche giornaliere e settimanali oppure si può scegliere una periodicità personalizzata (espressa in giorni).
 
 # Riassunto varie rotte:
 Nella tabella sono riassunte le varie rotte dell'applicazione, più avanti sono spiegate nel dettaglio.
-
+![riassunto_rotte](https://user-images.githubusercontent.com/75088977/104858084-179cae80-591d-11eb-83d5-e2fa6450f430.png)
 
 # GET dati attuali
 Specificando un box di coordinate, otterrete i dati riguardanti la velocità del vento, l'angolazione del vento e la nuvolosità delle città interne al box. Sarà specificata la data in cui sono stati calcolati tali valori. 
 Di seguito è riportato un esempio.
 
+![rotta_data](https://user-images.githubusercontent.com/75088977/104858086-18354500-591d-11eb-9fa6-88af5dc3688d.png)
 
 # GET statistiche
 Tramite questa rotta si ottengono le statistiche (media e varianza) sulla velocità del vento e sulla nuvolosità delle città nello storico. Il tipo delle statistiche deve essere specificato e può essere "clouds" (per ottenere statistiche della nuvolosità), "wind" (per ottenere statistiche della velocità del vento) o "all" (per ottenere entrambe). Saranno inoltre specificate nella risposta la città con la media più alta, quella con la media più bassa e quella con la varianza massima. È anche specificato il range di tempo a cui fanno riferimento i dati e il tipo dei dati (nuvolosità o velocità del vento).
 Di seguito un esempio.
+
+![rotta_stats](https://user-images.githubusercontent.com/75088977/104858082-17041800-591d-11eb-9e1f-0dfed2c3503c.png)
 
 
 # GET statistiche periodiche (periodo scelto dall'utente)
@@ -38,6 +41,7 @@ localhost:8080/WeeklyStats?type=wind
 # POST cambia box di coordinate
 Questa rotta serve per cambiare il box di coordinate che indica le città da cui raccogliere i dati per popolare lo storico. Si otterrà una risposta che confermerà la riuscita dell'operazione. Il box dovrà essere scritto nella forma riportata nell'esempio.
 
+![rotta_ChangeBox2](https://user-images.githubusercontent.com/75088977/104858085-18354500-591d-11eb-8c00-c2a8f517c8b3.png)
 
 
 # Use case diagram:
