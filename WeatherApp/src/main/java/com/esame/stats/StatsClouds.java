@@ -5,12 +5,25 @@ import java.util.ArrayList;
 import com.esame.model.City;
 import com.esame.model.Stats;
 
+/**
+ * Classe StatsClounds estende StatsParent implementa StatsInterface
+ * @author Riccardo Malpiedi
+ *
+ */
 public class StatsClouds extends StatsParent implements StatsInterface {
 	
+	/**
+	 * Costruttore della classe StatsClouds
+	 * @param arrayCities
+	 */
 	public StatsClouds(ArrayList<City> arrayCities) {
 		super(arrayCities);
 	}
 	
+	/**
+	 * Calcola le statistiche per la nuvolosita'
+	 * @return stats
+	 */
 	public Stats calculate() {
 		Stats stats = new Stats();
 		double sum=0;

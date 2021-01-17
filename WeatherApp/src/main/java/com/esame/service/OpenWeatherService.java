@@ -20,6 +20,11 @@ import com.esame.filter.FilterDaily;
 import com.esame.filter.FilterWeekly;
 import com.esame.model.City;
 
+/**
+ * Classe Service
+ * @author Riccardo Vico
+ * @author Riccardo Malpiedi
+ */
 @Service
 public class OpenWeatherService {
 	
@@ -72,10 +77,10 @@ public class OpenWeatherService {
 	}
 	
 	/**
-	 * Metodo che legge dati da storico, li filtra secondo la periodicità indicata e
+	 * Metodo che legge dati da storico, li filtra secondo la periodicita' indicata e
 	 * calcola le statistiche del tipo richiesto
-	 * @param type tipo (es. nuvolosità)
-	 * @param period periodictà espressa in giorni
+	 * @param type tipo (es. nuvolosita')
+	 * @param period periodicta' espressa in giorni
 	 * @return statistiche rischieste
 	 */
 	@SuppressWarnings("unchecked")
@@ -96,7 +101,7 @@ public class OpenWeatherService {
 	
 	/**
 	 * Metodo che legge dati da storico e calcola statistiche settimanali del tipo richiesto
-	 * @param type tipo (es. nuvolosità)
+	 * @param type tipo (es. nuvolosita')
 	 * @return statistiche richieste
 	 */
 	@SuppressWarnings("unchecked")
@@ -117,7 +122,7 @@ public class OpenWeatherService {
 	
 	/**
 	 * Metodo che legge dati da storico e calcola statistiche giornaliere del tipo richiesto
-	 * @param type tipo (es. nuvolosità)
+	 * @param type tipo (es. nuvolosita')
 	 * @return statistiche richieste
 	 */
 	@SuppressWarnings("unchecked")
@@ -137,7 +142,7 @@ public class OpenWeatherService {
 	}
 	
 	/**
-	 * Metodo per cambiare il box di coordinate delle città in osservazione
+	 * Metodo per cambiare il box di coordinate delle citta' in osservazione
 	 * @param box box box di coordinate
 	 * @return stringa che indica se l'operazione è andata a buon fine
 	 */

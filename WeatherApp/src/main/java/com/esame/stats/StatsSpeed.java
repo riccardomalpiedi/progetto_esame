@@ -5,12 +5,24 @@ import java.util.ArrayList;
 import com.esame.model.City;
 import com.esame.model.Stats;
 
+/**
+ * Classe StatsSpeed estende StatsParents implementa StatsInterface
+ * @author Riccardo Malpiedi
+ */
 public class StatsSpeed extends StatsParent implements StatsInterface {
 	
+	/**
+	 * Costruttore della classe StatsSpeed
+	 * @param arrayCities
+	 */
 	public StatsSpeed(ArrayList<City> arrayCities) {
 		super(arrayCities);
 	}
 
+	/**
+	 * Classe Stats calcola le statistiche della velocita' del vento
+	 * @return stats
+	 */
 	public Stats calculate() {
 		Stats stats = new Stats();
 		double sum=0;

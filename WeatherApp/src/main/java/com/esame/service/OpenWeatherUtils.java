@@ -19,6 +19,11 @@ import com.esame.model.StatsObject;
 import com.esame.stats.StatsClouds;
 import com.esame.stats.StatsSpeed;
 
+/**
+ * Classe Utils
+ * @author Riccardo Malpiedi
+ * @author Riccardo Vico
+ */
 public class OpenWeatherUtils {
 	
 	/**

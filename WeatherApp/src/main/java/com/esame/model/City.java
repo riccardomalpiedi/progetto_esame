@@ -9,13 +9,14 @@ import org.json.simple.JSONObject;
  * @author Riccardo Malpiedi
  */
 public class City implements Comparable<City> {
+	
 	/**
-	 * Nome della città
+	 * Nome della citta'
 	 */
 	private String name;
 	
 	/**
-	 * Velocità del vento
+	 * Velocita' del vento
 	 */
 	private double speed;
 	
@@ -25,7 +26,7 @@ public class City implements Comparable<City> {
 	private int deg;
 	
 	/**
-	 * Nuvolosità
+	 * Nuvolosita'
 	 */
 	private double clouds;
 	
@@ -52,7 +53,7 @@ public class City implements Comparable<City> {
 	}
 	
 	/**
-	 * compareTo che confronta città in base alla data
+	 * compareTo che confronta citta' in base alla data
 	 * 
 	 * @param city
 	 */
@@ -70,7 +71,7 @@ public class City implements Comparable<City> {
 	
 	/**
 	 * Metodo che restituisce il JSONObject
-	 * @return obj
+	 * @return JSONObject
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject getJsonObject() {
@@ -108,7 +109,7 @@ public class City implements Comparable<City> {
 	}
 
 	/**
-	 * Getter della velocità del vento
+	 * Getter della velocita' del vento
 	 * @return speed
 	 */
 	public double getSpeed() {
@@ -116,7 +117,7 @@ public class City implements Comparable<City> {
 	}
 
 	/**
-	 * Setter della velocità del vento
+	 * Setter della velocita' del vento
 	 * @param speed
 	 */
 	public void setSpeed(double speed) {
@@ -140,7 +141,7 @@ public class City implements Comparable<City> {
 	}
 
 	/**
-	 * Getter della nuvolosità
+	 * Getter della nuvolosita'
 	 * @return clouds
 	 */
 	public double getClouds() {
@@ -148,7 +149,7 @@ public class City implements Comparable<City> {
 	}
 
 	/**
-	 * Setter della nuvolosità
+	 * Setter della nuvolosita'
 	 * @param clouds
 	 */
 	public void setClouds(double clouds) {

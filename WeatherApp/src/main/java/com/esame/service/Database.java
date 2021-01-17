@@ -20,6 +20,11 @@ import org.springframework.stereotype.Component;
 
 import com.esame.model.City;
 
+/**
+ * Classe Database
+ * @author Riccardo Vico
+ * @author Riccardo Malpiedi
+ */
 @Component
 public class Database { 
 	

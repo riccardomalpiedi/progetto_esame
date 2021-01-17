@@ -4,12 +4,26 @@ import java.util.ArrayList;
 
 import com.esame.model.City;
 
+/**
+ * Classe per filtrare i dati per nome
+ * @author Riccardo Vico
+ * @author Riccardo Malpiedi
+ *
+ */
 public class FilterByName extends FilterParent implements Filter{
 	
+	/**
+	 * Costruttore della classe FilterByName
+	 * @param arrayCities
+	 */
 	public FilterByName(ArrayList<City> arrayCities) {
 		super(arrayCities);
 	}
 	
+	/**
+	 * Implementazione del metodo filter
+	 * @return arrayCitiesFiltered
+	 */
 	public ArrayList<City> filter() {
 		ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
 		arrayCitiesFiltered.add(arrayCities.get(0));
