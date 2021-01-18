@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.esame.exceptions.InvalidTypeException;
 import com.esame.service.OpenWeatherService;
 
 /**
@@ -34,9 +35,10 @@ public class Controller {
 	 * Rotta get per visualizzare le statistiche del tipo richiesto
 	 * @param type
 	 * @return statistiche
+	 * @throws InvalidTypeException 
 	 */
 	@GetMapping("/Stats")
-	public JSONArray getStats(@RequestParam String type) {
+	public JSONArray getStats(@RequestParam String type) throws InvalidTypeException {
 		return openWeatherService.statsService(type);
 	}
 	
@@ -45,9 +47,10 @@ public class Controller {
 	 * @param type
 	 * @param period
 	 * @return statistiche periodiche
+	 * @throws InvalidTypeException 
 	 */
 	@GetMapping("/PeriodicalStats")
-	public JSONArray getPeriodicalStats(@RequestParam String type, @RequestParam int period) {
+	public JSONArray getPeriodicalStats(@RequestParam String type, @RequestParam int period) throws InvalidTypeException {
 		return openWeatherService.periodicalStatsService(type, period);
 	}
 	
@@ -55,9 +58,10 @@ public class Controller {
 	 * Rotta get per visualizzare le statistiche settimanali del tipo richiesto
 	 * @param type
 	 * @return statistiche settimanali
+	 * @throws InvalidTypeException 
 	 */
 	@GetMapping("/WeeklyStats")
-	public JSONArray getWeeklyStats(@RequestParam String type) {
+	public JSONArray getWeeklyStats(@RequestParam String type) throws InvalidTypeException {
 		return openWeatherService.weeklyStatsService(type);
 	}
 	
@@ -65,9 +69,10 @@ public class Controller {
 	 * Rotta get per visualizzare le statistiche giornaliere del tipo richiesto
 	 * @param type
 	 * @return statistiche giornaliere
+	 * @throws InvalidTypeException 
 	 */
 	@GetMapping("/DailyStats")
-	public JSONArray getDailyStats(@RequestParam String type) {
+	public JSONArray getDailyStats(@RequestParam String type) throws InvalidTypeException {
 		return openWeatherService.dailyStatsService(type);
 	}
 	
@@ -75,6 +80,7 @@ public class Controller {
 	 * Rotta post per cambiare il box di coordinate 
 	 * @param box
 	 * @return risposta sulla corretta esecuzione
+	 * @throws InvalidBoxException 
 	 */
 	@PostMapping("/ChangeBox")
 	public String changeBox(@RequestBody JSONObject box) {

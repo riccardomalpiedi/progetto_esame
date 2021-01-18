@@ -1,1 +1,1 @@
-memberSearchIndex = [{"p":"com.esame.stats","c":"StatsSpeed","l":"calculate()"},{"p":"com.esame.stats","c":"StatsSpeed","l":"StatsSpeed(ArrayList<City>)","url":"%3Cinit%3E(java.util.ArrayList)"}]
+memberSearchIndex = [{"p":"com.esame.WeatherApp","c":"WeatherApplicationTests","l":"WeatherApplicationTests()","url":"%3Cinit%3E()"}]

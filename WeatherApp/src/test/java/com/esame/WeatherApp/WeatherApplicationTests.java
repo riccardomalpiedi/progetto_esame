@@ -21,7 +21,7 @@ import com.esame.stats.StatsClouds;
  * @author Riccardo Vico
  */
 @SpringBootTest
-class WeatherApplicationTests {
+public class WeatherApplicationTests {
 	/**
 	 * oggetto per calcolo statistiche
 	 */

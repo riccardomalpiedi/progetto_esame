@@ -12,6 +12,7 @@ import java.util.Collections;
 
 import org.json.simple.JSONArray;
 
+import com.esame.exceptions.InvalidTypeException;
 import com.esame.filter.FilterByName;
 import com.esame.model.City;
 import com.esame.model.Stats;
@@ -90,9 +91,10 @@ public class OpenWeatherUtils {
 	 * @param type tipo (es. nuvolosita')
 	 * @param periodOfDatas periodo a cui si riferiscono i dati
 	 * @return statistiche richieste
+	 * @throws InvalidTypeException 
 	 */
 	@SuppressWarnings("unchecked")
-	public static JSONArray statsUtil(ArrayList<City> arrayCities, String type, String periodOfDatas) {
+	public static JSONArray statsUtil(ArrayList<City> arrayCities, String type, String periodOfDatas) throws InvalidTypeException {
 		JSONArray jsonArrayStatsObjects = new JSONArray();
 		FilterByName filterByName = new FilterByName(arrayCities);
 		ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
@@ -140,7 +142,8 @@ public class OpenWeatherUtils {
 			jsonArrayStatsObjects.add(statsObject3.getJsonObject());
 			StatsObject statsObject4 = new StatsObject(arrayStats2, "velocità del vento", periodOfDatas);
 			jsonArrayStatsObjects.add(statsObject4.getJsonObject());
-			
+			break;
+		default: throw new InvalidTypeException();
 		}
 		return jsonArrayStatsObjects;
 	}

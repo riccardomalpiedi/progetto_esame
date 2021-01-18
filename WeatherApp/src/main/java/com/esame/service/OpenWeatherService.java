@@ -14,7 +14,7 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
-
+import com.esame.exceptions.InvalidTypeException;
 import com.esame.filter.FilterByPeriod;
 import com.esame.filter.FilterDaily;
 import com.esame.filter.FilterWeekly;
@@ -67,8 +67,9 @@ public class OpenWeatherService {
 	 * Metodo che legge dati da storico e calcola le statistiche del tipo richiesto
 	 * @param type tipo (es. nuvolosità)
 	 * @return statistiche richieste
+	 * @throws InvalidTypeException 
 	 */
-	public JSONArray statsService(String type) {
+	public JSONArray statsService(String type) throws InvalidTypeException {
 		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
 		String periodOfDatas = "da " + arrayCities.get(0).getDate().toString() + " a " + 
                 arrayCities.get(arrayCities.size()-1).getDate().toString();
@@ -82,9 +83,10 @@ public class OpenWeatherService {
 	 * @param type tipo (es. nuvolosita')
 	 * @param period periodicta' espressa in giorni
 	 * @return statistiche rischieste
+	 * @throws InvalidTypeException 
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONArray periodicalStatsService(String type, int period) {
+	public JSONArray periodicalStatsService(String type, int period) throws InvalidTypeException {
 		JSONArray jsonArrayStatsObjects = new JSONArray();
 		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
 		ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
@@ -103,9 +105,10 @@ public class OpenWeatherService {
 	 * Metodo che legge dati da storico e calcola statistiche settimanali del tipo richiesto
 	 * @param type tipo (es. nuvolosita')
 	 * @return statistiche richieste
+	 * @throws InvalidTypeException 
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONArray weeklyStatsService(String type) {
+	public JSONArray weeklyStatsService(String type) throws InvalidTypeException {
 		JSONArray jsonArrayStatsObjects = new JSONArray();
 		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
 		ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
@@ -124,9 +127,10 @@ public class OpenWeatherService {
 	 * Metodo che legge dati da storico e calcola statistiche giornaliere del tipo richiesto
 	 * @param type tipo (es. nuvolosita')
 	 * @return statistiche richieste
+	 * @throws InvalidTypeException 
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONArray dailyStatsService(String type) {
+	public JSONArray dailyStatsService(String type) throws InvalidTypeException {
 		JSONArray jsonArrayStatsObjects = new JSONArray();
 		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
 		ArrayList<City> arrayCitiesFiltered = new ArrayList<>();
@@ -145,6 +149,7 @@ public class OpenWeatherService {
 	 * Metodo per cambiare il box di coordinate delle citta' in osservazione
 	 * @param box box box di coordinate
 	 * @return stringa che indica se l'operazione è andata a buon fine
+	 * @throws InvalidBoxException 
 	 */
 	public String changeBoxService(String box) {
 		String result = OpenWeatherUtils.API_Call(box);
@@ -167,7 +172,7 @@ public class OpenWeatherService {
 					e.printStackTrace();
 				}
 				return "Operazione Eseguita con Successo";
-			}
+			} 
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
