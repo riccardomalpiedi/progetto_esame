@@ -21,7 +21,8 @@ public class FilterByName extends FilterParent implements Filter{
 	}
 	
 	/**
-	 * Implementazione del metodo filter
+	 * Implementazione del metodo filter. Prende un gruppo di citta' che hanno lo stesso nome e
+	 * lo restituisce, prima pero' lo rimuove dall'arrayCities.
 	 * @return arrayCitiesFiltered
 	 */
 	public ArrayList<City> filter() {

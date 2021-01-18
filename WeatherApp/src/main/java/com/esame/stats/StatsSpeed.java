@@ -6,7 +6,7 @@ import com.esame.model.City;
 import com.esame.model.Stats;
 
 /**
- * Classe StatsSpeed estende StatsParents implementa StatsInterface
+ * Classe StatsSpeed estende StatsParent implementa StatsInterface
  * @author Riccardo Malpiedi
  */
 public class StatsSpeed extends StatsParent implements StatsInterface {
@@ -20,7 +20,7 @@ public class StatsSpeed extends StatsParent implements StatsInterface {
 	}
 
 	/**
-	 * Classe Stats calcola le statistiche della velocita' del vento
+	 * Calcola le statistiche della velocita' del vento
 	 * @return stats
 	 */
 	public Stats calculate() {

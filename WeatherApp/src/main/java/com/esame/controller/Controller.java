@@ -80,7 +80,6 @@ public class Controller {
 	 * Rotta post per cambiare il box di coordinate 
 	 * @param box
 	 * @return risposta sulla corretta esecuzione
-	 * @throws InvalidBoxException 
 	 */
 	@PostMapping("/ChangeBox")
 	public String changeBox(@RequestBody JSONObject box) {

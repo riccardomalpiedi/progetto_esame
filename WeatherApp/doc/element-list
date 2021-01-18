@@ -1,1 +1,8 @@
+com.esame
+com.esame.controller
+com.esame.exceptions
+com.esame.filter
+com.esame.model
+com.esame.service
+com.esame.stats
 com.esame.WeatherApp

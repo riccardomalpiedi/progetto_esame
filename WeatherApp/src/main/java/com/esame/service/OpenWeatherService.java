@@ -149,7 +149,6 @@ public class OpenWeatherService {
 	 * Metodo per cambiare il box di coordinate delle citta' in osservazione
 	 * @param box box box di coordinate
 	 * @return stringa che indica se l'operazione è andata a buon fine
-	 * @throws InvalidBoxException 
 	 */
 	public String changeBoxService(String box) {
 		String result = OpenWeatherUtils.API_Call(box);

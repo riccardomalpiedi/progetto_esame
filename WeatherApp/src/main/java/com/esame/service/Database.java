@@ -35,10 +35,8 @@ public class Database {
 	@Scheduled(fixedRateString = "PT2H")
 	public void download() {
 		String box = null;
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader("box.txt"));
+		try(BufferedReader bufferedReader = new BufferedReader(new FileReader("box.txt"));) {
 			box = bufferedReader.readLine();
-			bufferedReader.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -36,7 +36,7 @@ public class OpenWeatherUtils {
 		String API_KEY = null;
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader("APIKey.txt"))) {
 			API_KEY = bufferedReader.readLine();
-		}catch (IOException e){
+		} catch (IOException e){
 			e.printStackTrace();
 		}
 		String COORDINATES = box;

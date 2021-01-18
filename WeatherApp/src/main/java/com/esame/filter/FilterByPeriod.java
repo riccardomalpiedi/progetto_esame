@@ -35,7 +35,9 @@ public class FilterByPeriod extends FilterParent implements Filter {
 	}
 	
 	/**
-	 * Implementazione del metodo filter
+	 * Implementazione del metodo filter. Prende tutti gli oggetti City la cui data e' compresa tra la data
+	 * del primo oggetto (quindi la data piu' vecchia) e la stessa data a cui viene sommato il periodo.
+	 * Questo gruppo di oggetti viene rimosso da arrayCities e poi restituito dal metodo.
 	 * @return arrayCitiesFiltered
 	 */
 	public ArrayList<City> filter() {
