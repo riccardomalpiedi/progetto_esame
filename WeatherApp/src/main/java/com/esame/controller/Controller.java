@@ -1,7 +1,5 @@
 package com.esame.controller;
 
-import java.util.ArrayList;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import com.esame.exceptions.InvalidBoxException;
 import com.esame.exceptions.InvalidNamesException;
 import com.esame.exceptions.InvalidPeriodException;
 import com.esame.exceptions.InvalidTypeException;
-import com.esame.filter.FilterByChosenNames;
 import com.esame.service.OpenWeatherService;
 
 /**
@@ -36,18 +33,6 @@ public class Controller {
 	@GetMapping("/Data")
 	public JSONArray getActualData(@RequestParam String box) throws InvalidBoxException {
 		return openWeatherService.actualDataService(box);
-	}
-	
-	/**
-	 * Rotta get per visualizzare le statistiche del tipo richiesto
-	 * @param type
-	 * @return statistiche
-	 * @throws InvalidTypeException 
-	 * @throws InvalidNamesException 
-	 */
-	@PostMapping("/Stats")
-	public JSONArray getStats(@RequestBody JSONObject object) throws InvalidTypeException, InvalidNamesException {
-		return openWeatherService.statsService(object);
 	}
 	
 	/**

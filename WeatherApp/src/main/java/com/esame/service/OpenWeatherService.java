@@ -71,41 +71,6 @@ public class OpenWeatherService {
 	}
 	
 	/**
-	 * Metodo che legge dati da storico e calcola le statistiche del tipo richiesto
-	 * @param type tipo (es. nuvolosità)
-	 * @return statistiche richieste
-	 * @throws InvalidTypeException 
-	 * @throws InvalidNamesException 
-	 */
-	@SuppressWarnings("unchecked")
-	public JSONArray statsService(JSONObject object) throws InvalidTypeException, InvalidNamesException {
-		String type = null;
-		ArrayList<String> names = null;
-		try {
-			type = (String) object.get("type");
-		} catch(Exception e) {
-			throw new InvalidTypeException();
-		}
-		if(type == null)
-			type = "all";
-		ArrayList<City> arrayCities = OpenWeatherUtils.readCSV();
-		try {
-			names = (ArrayList<String>) object.get("names");
-		} catch(Exception e) {
-			throw new InvalidNamesException();
-		}
-		if(arrayCities.isEmpty()) throw(new InvalidNamesException());
-		if(names != null) {
-			FilterByChosenNames filterByChosenNames = new FilterByChosenNames(arrayCities, names);
-			arrayCities = filterByChosenNames.filter();
-		}
-		String periodOfDatas = "da " + arrayCities.get(0).getDate().toString() + " a " + 
-                arrayCities.get(arrayCities.size()-1).getDate().toString();
-		return OpenWeatherUtils.statsUtil(arrayCities, type, periodOfDatas);
-		
-	}
-	
-	/**
 	 * Metodo che legge dati da storico, li filtra secondo la periodicita' indicata e
 	 * calcola le statistiche del tipo richiesto
 	 * @param type tipo (es. nuvolosita')
@@ -117,7 +82,7 @@ public class OpenWeatherService {
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONArray periodicalStatsService(JSONObject object) throws InvalidTypeException, InvalidPeriodException, InvalidNamesException {
-		String type = null;
+		String type = "all";
 		int period = 1000;
 		ArrayList<String> names = null;
 		try {
@@ -125,8 +90,6 @@ public class OpenWeatherService {
 		} catch(Exception e) {
 			throw new InvalidTypeException();
 		}
-		if(type == null)
-			type = "all";
 		try {
 			period = Integer.parseInt(object.get("period").toString());
 		} catch(NullPointerException e) {
