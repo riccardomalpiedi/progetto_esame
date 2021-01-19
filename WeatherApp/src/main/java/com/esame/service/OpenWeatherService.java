@@ -14,6 +14,7 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
+import com.esame.exceptions.InvalidBoxException;
 import com.esame.exceptions.InvalidTypeException;
 import com.esame.filter.FilterByPeriod;
 import com.esame.filter.FilterDaily;
@@ -32,9 +33,10 @@ public class OpenWeatherService {
 	 * Metodo che esegue chiamata all'API e jsonparsing
 	 * @param box box di coordinate
 	 * @return info attuali su città interne al box
+	 * @throws InvalidBoxException 
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONArray actualDataService(String box) {
+	public JSONArray actualDataService(String box) throws InvalidBoxException {
 		String result = OpenWeatherUtils.API_Call(box);
 		JSONArray jsonArrayCities = new JSONArray();
 		try {
@@ -58,7 +60,9 @@ public class OpenWeatherService {
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}
+		} catch(Exception e) {
+	    	throw new InvalidBoxException();
+	    }
 		return jsonArrayCities;
 			
 	}

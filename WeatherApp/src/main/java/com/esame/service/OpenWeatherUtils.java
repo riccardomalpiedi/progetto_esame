@@ -54,6 +54,7 @@ public class OpenWeatherUtils {
 			rd.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
 		}
 		return result.toString();
 	}

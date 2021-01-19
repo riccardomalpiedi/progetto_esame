@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.esame.exceptions.InvalidBoxException;
 import com.esame.exceptions.InvalidTypeException;
 import com.esame.service.OpenWeatherService;
 
@@ -25,9 +26,10 @@ public class Controller {
 	 * Rotta get per visualizzare dati attuali su vento e nuvolosita'
 	 * @param box
 	 * @return box con dati attuali
+	 * @throws InvalidBoxException 
 	 */
 	@GetMapping("/Data")
-	public JSONArray getActualData(@RequestParam String box) {
+	public JSONArray getActualData(@RequestParam String box) throws InvalidBoxException {
 		return openWeatherService.actualDataService(box);
 	}
 	
