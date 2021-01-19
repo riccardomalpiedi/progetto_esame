@@ -1,5 +1,7 @@
 package com.esame.controller;
 
+import java.util.ArrayList;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esame.exceptions.InvalidBoxException;
+import com.esame.exceptions.InvalidNamesException;
+import com.esame.exceptions.InvalidPeriodException;
 import com.esame.exceptions.InvalidTypeException;
+import com.esame.filter.FilterByChosenNames;
 import com.esame.service.OpenWeatherService;
 
 /**
@@ -38,10 +43,11 @@ public class Controller {
 	 * @param type
 	 * @return statistiche
 	 * @throws InvalidTypeException 
+	 * @throws InvalidNamesException 
 	 */
-	@GetMapping("/Stats")
-	public JSONArray getStats(@RequestParam String type) throws InvalidTypeException {
-		return openWeatherService.statsService(type);
+	@PostMapping("/Stats")
+	public JSONArray getStats(@RequestBody JSONObject object) throws InvalidTypeException, InvalidNamesException {
+		return openWeatherService.statsService(object);
 	}
 	
 	/**
@@ -50,10 +56,12 @@ public class Controller {
 	 * @param period
 	 * @return statistiche periodiche
 	 * @throws InvalidTypeException 
+	 * @throws InvalidNamesException 
+	 * @throws InvalidPeriodException 
 	 */
-	@GetMapping("/PeriodicalStats")
-	public JSONArray getPeriodicalStats(@RequestParam String type, @RequestParam int period) throws InvalidTypeException {
-		return openWeatherService.periodicalStatsService(type, period);
+	@PostMapping("/PeriodicalStats")
+	public JSONArray getPeriodicalStats(@RequestBody JSONObject object) throws InvalidTypeException, InvalidPeriodException, InvalidNamesException {
+		return openWeatherService.periodicalStatsService(object);
 	}
 	
 	/**
@@ -61,10 +69,11 @@ public class Controller {
 	 * @param type
 	 * @return statistiche settimanali
 	 * @throws InvalidTypeException 
+	 * @throws InvalidNamesException 
 	 */
-	@GetMapping("/WeeklyStats")
-	public JSONArray getWeeklyStats(@RequestParam String type) throws InvalidTypeException {
-		return openWeatherService.weeklyStatsService(type);
+	@PostMapping("/WeeklyStats")
+	public JSONArray getWeeklyStats(@RequestBody JSONObject object) throws InvalidTypeException, InvalidNamesException {
+		return openWeatherService.weeklyStatsService(object);
 	}
 	
 	/**
@@ -72,20 +81,22 @@ public class Controller {
 	 * @param type
 	 * @return statistiche giornaliere
 	 * @throws InvalidTypeException 
+	 * @throws InvalidNamesException 
 	 */
-	@GetMapping("/DailyStats")
-	public JSONArray getDailyStats(@RequestParam String type) throws InvalidTypeException {
-		return openWeatherService.dailyStatsService(type);
+	@PostMapping("/DailyStats")
+	public JSONArray getDailyStats(@RequestBody JSONObject object) throws InvalidTypeException, InvalidNamesException {
+		return openWeatherService.dailyStatsService(object);
 	}
 	
 	/**
 	 * Rotta post per cambiare il box di coordinate 
 	 * @param box
 	 * @return risposta sulla corretta esecuzione
+	 * @throws InvalidBoxException 
 	 */
-	@PostMapping("/ChangeBox")
-	public String changeBox(@RequestBody JSONObject box) {
-		return openWeatherService.changeBoxService(box.get("box").toString());
+	@GetMapping("/ChangeBox")
+	public String changeBox(@RequestParam String box) throws InvalidBoxException {
+		return openWeatherService.changeBoxService(box);
 	}
 }
 

@@ -18,6 +18,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.esame.exceptions.InvalidBoxException;
 import com.esame.model.City;
 
 /**
@@ -31,9 +32,10 @@ public class Database {
 	/**
 	 * 
 	 * metodo che esegue chiamata all'API ogni due ore e salva i dati utili in un file CSV
+	 * @throws InvalidBoxException 
 	 */
 	@Scheduled(fixedRateString = "PT2H")
-	public void download() {
+	public void download() throws InvalidBoxException {
 		String box = null;
 		try(BufferedReader bufferedReader = new BufferedReader(new FileReader("box.txt"));) {
 			box = bufferedReader.readLine();

@@ -28,13 +28,9 @@ public class WeatherApplicationTests {
 	private StatsClouds statsClouds;
 	
 	/**
-	 * primo oggetto stats
+	 * oggetto Stats
 	 */
-	private Stats stats1;
-	/**
-	 * secondo oggetto stats
-	 */
-	private Stats stats2;
+	private Stats stats;
 	
 	/**
 	 * Inizializza gli oggetti da testare
@@ -49,8 +45,7 @@ public class WeatherApplicationTests {
 		arrayCities.add(city1);
 		arrayCities.add(city2);
 		statsClouds = new StatsClouds(arrayCities);
-		stats1 = new Stats("Milano", 7.5, 6.25);
-		stats2 = new Stats();
+		stats = new Stats();
 		
 	}
 	
@@ -68,11 +63,11 @@ public class WeatherApplicationTests {
 	@Test
 	@DisplayName("Test 1: verifica correttezza calcolo statistiche")
 	void testStats() {
-		stats2 = statsClouds.calculate();
-		stats2.setName("Milano");
-		assertEquals(stats1.getName(), stats2.getName());
-		assertEquals(stats1.getAverage(), stats2.getAverage());
-		assertEquals(stats1.getVariance(), stats2.getVariance());
+		stats = statsClouds.calculate();
+		stats.setName("Milano");
+		assertEquals("Milano", stats.getName());
+		assertEquals(7.5, stats.getAverage());
+		assertEquals(6.25, stats.getVariance());
 	}
 
 }

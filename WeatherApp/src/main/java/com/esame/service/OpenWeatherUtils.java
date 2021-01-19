@@ -12,6 +12,7 @@ import java.util.Collections;
 
 import org.json.simple.JSONArray;
 
+import com.esame.exceptions.InvalidBoxException;
 import com.esame.exceptions.InvalidTypeException;
 import com.esame.filter.FilterByName;
 import com.esame.model.City;
@@ -31,8 +32,9 @@ public class OpenWeatherUtils {
 	 * metodo static che esegue chiamata all'API e salva contenuto in una stringa
 	 * @param box di coordinate
 	 * @return stringa contenente il json
+	 * @throws InvalidBoxException 
 	 */
-	public static String API_Call(String box) {
+	public static String API_Call(String box) throws InvalidBoxException {
 		String API_KEY = null;
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader("APIKey.txt"))) {
 			API_KEY = bufferedReader.readLine();
@@ -53,8 +55,7 @@ public class OpenWeatherUtils {
 			}
 			rd.close();
 		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
+			throw new InvalidBoxException();
 		}
 		return result.toString();
 	}
