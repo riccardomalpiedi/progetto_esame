@@ -1,7 +1,14 @@
 package com.esame.WeatherApp;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -11,6 +18,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.esame.exceptions.InvalidBoxException;
 import com.esame.model.City;
 import com.esame.model.Stats;
 import com.esame.stats.StatsClouds;
@@ -33,6 +41,16 @@ public class WeatherApplicationTests {
 	private Stats stats;
 	
 	/**
+	 * stringa contenente l'URL
+	 */
+	private String urlString;
+	
+	/**
+	 * InvalidBoxException che abbiamo creato noi
+	 */
+	private InvalidBoxException invalidBoxException;
+	
+	/**
 	 * Inizializza gli oggetti da testare
 	 * @throws Exception
 	 */
@@ -47,6 +65,17 @@ public class WeatherApplicationTests {
 		statsClouds = new StatsClouds(arrayCities);
 		stats = new Stats();
 		
+		String API_KEY = null;
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader("APIKey.txt"))) {
+			API_KEY = bufferedReader.readLine();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		String COORDINATES = "box non valido";
+		urlString = "http://api.openweathermap.org/data/2.5/box/city?bbox=" + COORDINATES
+				+ ",10&appid=" + API_KEY;
+		
+		invalidBoxException = new InvalidBoxException();
 	}
 	
 	/**
@@ -69,5 +98,30 @@ public class WeatherApplicationTests {
 		assertEquals(7.5, stats.getAverage());
 		assertEquals(6.25, stats.getVariance());
 	}
+	
+	/**
+	 * Test che verifica che sia lanciata l'IOException quando usiamo un URL con un box non valido
+	 */
+	@SuppressWarnings("unused")
+	@Test
+	@DisplayName("Test 2: verifica che sia lanciata l'exception")
+	void testException() {
+		IOException exception = assertThrows(IOException.class, () -> {
+			URL url = new URL(urlString);
+			URLConnection connection = url.openConnection();
+			BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		});
+	}
+	
+	/**
+	 * Test che verifica che il messaggio dell'Exception sia corretto
+	 */
+	@Test
+	@DisplayName("Test 3: verifica messaggio exceptions")
+	void testException2() {
+		assertEquals("Errore: Box di coordinate non valido", invalidBoxException.getMessage());
+	}
+	
+	
 
 }

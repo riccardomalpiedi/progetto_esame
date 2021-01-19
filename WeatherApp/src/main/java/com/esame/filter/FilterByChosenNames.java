@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import com.esame.model.City;
 
+/**
+ * Classe che filtra i dati secondo i nomi scelti dall'utente
+ * @author Riccardo Malpiedi
+ *
+ */
 public class FilterByChosenNames extends FilterParent implements Filter {
 	/**
 	 * ArrayList di nomi
@@ -13,6 +18,7 @@ public class FilterByChosenNames extends FilterParent implements Filter {
 	/**
 	 * Costruttore della classe FilterByChosenName
 	 * @param arrayCities
+	 * @param names
 	 */
 	public FilterByChosenNames(ArrayList<City> arrayCities, ArrayList<String> names) {
 		super(arrayCities);

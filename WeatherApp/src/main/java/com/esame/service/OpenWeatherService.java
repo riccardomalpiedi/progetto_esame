@@ -73,8 +73,7 @@ public class OpenWeatherService {
 	/**
 	 * Metodo che legge dati da storico, li filtra secondo la periodicita' indicata e
 	 * calcola le statistiche del tipo richiesto
-	 * @param type tipo (es. nuvolosita')
-	 * @param period periodicta' espressa in giorni
+	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche rischieste
 	 * @throws InvalidTypeException 
 	 * @throws InvalidPeriodException 
@@ -82,7 +81,7 @@ public class OpenWeatherService {
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONArray periodicalStatsService(JSONObject object) throws InvalidTypeException, InvalidPeriodException, InvalidNamesException {
-		String type = "all";
+		String type = null;
 		int period = 1000;
 		ArrayList<String> names = null;
 		try {
@@ -90,6 +89,8 @@ public class OpenWeatherService {
 		} catch(Exception e) {
 			throw new InvalidTypeException();
 		}
+		if(type == null)
+			type = "all";
 		try {
 			period = Integer.parseInt(object.get("period").toString());
 		} catch(NullPointerException e) {
@@ -123,7 +124,7 @@ public class OpenWeatherService {
 	
 	/**
 	 * Metodo che legge dati da storico e calcola statistiche settimanali del tipo richiesto
-	 * @param type tipo (es. nuvolosita')
+	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche richieste
 	 * @throws InvalidTypeException 
 	 * @throws InvalidNamesException 
@@ -165,7 +166,7 @@ public class OpenWeatherService {
 	
 	/**
 	 * Metodo che legge dati da storico e calcola statistiche giornaliere del tipo richiesto
-	 * @param type tipo (es. nuvolosita')
+	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche richieste
 	 * @throws InvalidTypeException 
 	 * @throws InvalidNamesException 
@@ -207,7 +208,7 @@ public class OpenWeatherService {
 	
 	/**
 	 * Metodo per cambiare il box di coordinate delle citta' in osservazione
-	 * @param box box box di coordinate
+	 * @param box box di coordinate
 	 * @return stringa che indica se l'operazione è andata a buon fine
 	 * @throws InvalidBoxException 
 	 */

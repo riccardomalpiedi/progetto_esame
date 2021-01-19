@@ -30,7 +30,7 @@ public class OpenWeatherUtils {
 	
 	/**
 	 * metodo static che esegue chiamata all'API e salva contenuto in una stringa
-	 * @param box di coordinate
+	 * @param box box di coordinate
 	 * @return stringa contenente il json
 	 * @throws InvalidBoxException 
 	 */

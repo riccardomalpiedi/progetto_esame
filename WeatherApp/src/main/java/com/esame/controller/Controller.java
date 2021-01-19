@@ -26,8 +26,8 @@ public class Controller {
 	
 	/**
 	 * Rotta get per visualizzare dati attuali su vento e nuvolosita'
-	 * @param box
-	 * @return box con dati attuali
+	 * @param box di coordinate
+	 * @return dati attuali su vento e nuvolosita'
 	 * @throws InvalidBoxException 
 	 */
 	@GetMapping("/Data")
@@ -37,8 +37,7 @@ public class Controller {
 	
 	/**
 	 * Rotta get per visualizzare le statistiche del tipo richiesto filtrate secondo la periodicita' richiesta
-	 * @param type
-	 * @param period
+	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche periodiche
 	 * @throws InvalidTypeException 
 	 * @throws InvalidNamesException 
@@ -51,7 +50,7 @@ public class Controller {
 	
 	/**
 	 * Rotta get per visualizzare le statistiche settimanali del tipo richiesto
-	 * @param type
+	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche settimanali
 	 * @throws InvalidTypeException 
 	 * @throws InvalidNamesException 
@@ -63,7 +62,7 @@ public class Controller {
 	
 	/**
 	 * Rotta get per visualizzare le statistiche giornaliere del tipo richiesto
-	 * @param type
+	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche giornaliere
 	 * @throws InvalidTypeException 
 	 * @throws InvalidNamesException 
