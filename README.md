@@ -25,106 +25,207 @@ Un esempio di tale chiamata con un JSONObject vuoto:
 Una possibile risposta:
 
 [
+
     [
+    
         {
+        
             "Città con media più alta": "Ancona",
+            
             "Città con varianza massima": "Civitanova Marche",
+            
             "Città con media più bassa": "Macerata",
+            
             "tipo": "nuvolosità",
+            
             "periodo": "da 2021-01-03T20:08:46 a 2021-01-20T20:09:56",
+            
             "Statistiche": [
+            
                 {
+                
                     "name": "Osimo",
+                    
                     "average": 36.55555555555556,
+                    
                     "variance": 1002.1358024691358
+                    
                 },
+                
                 {
+                
                     "name": "Ancona",
+                    
                     "average": 46.0,
+                    
                     "variance": 871.3333333333334
+                    
                 },
+                
                 {
+                
                     "name": "Senigallia",
+                    
                     "average": 40.55555555555556,
+                    
                     "variance": 985.8024691358023
+                    
                 },
+                
                 {
+                
                     "name": "Macerata",
+                    
                     "average": 25.5,
+                    
                     "variance": 1218.138888888889
+                    
                 },
+                
                 {
+                
                     "name": "Civitanova Marche",
+                    
                     "average": 39.94444444444444,
+                   
                     "variance": 1443.9413580246912
+                    
                 },
+                
                 {
+                
                     "name": "Tolentino",
+                    
                     "average": 28.5,
+                    
                     "variance": 1142.8055555555557
+                    
                 },
+                
                 {
+                
                     "name": "Fermo",
+                    
                     "average": 27.22222222222222,
+                    
                     "variance": 1049.9506172839506
+                    
                 },
+                
                 {
+                
                     "name": "Iesi",
+                    
                     "average": 42.27777777777778,
+                    
                     "variance": 1107.4228395061727
+                    
                 }
+                
             ]
+            
         },
+        
         {
+        
             "Città con media più alta": "Ancona",
+            
             "Città con varianza massima": "Civitanova Marche",
+            
             "Città con media più bassa": "Macerata",
+            
             "tipo": "velocità del vento",
+            
             "periodo": "da 2021-01-03T20:08:46 a 2021-01-20T20:09:56",
+           
             "Statistiche": [
+            
                 {
+                
                     "name": "Osimo",
+                    
                     "average": 36.55555555555556,
+                    
                     "variance": 1002.1358024691358
+                    
                 },
+                
                 {
+                
                     "name": "Ancona",
+                    
                     "average": 46.0,
+                    
                     "variance": 871.3333333333334
+                    
                 },
+                
                 {
+                
                     "name": "Senigallia",
+                    
                     "average": 40.55555555555556,
+                    
                     "variance": 985.8024691358023
+                    
                 },
+                
                 {
+                
                     "name": "Macerata",
+                    
                     "average": 25.5,
+                    
                     "variance": 1218.138888888889
+                    
                 },
+                
                 {
+                
                     "name": "Civitanova Marche",
+                    
                     "average": 39.94444444444444,
+                    
                     "variance": 1443.9413580246912
+                    
                 },
+                
                 {
+                
                     "name": "Tolentino",
+                    
                     "average": 28.5,
+                    
                     "variance": 1142.8055555555557
+                    
                 },
+                
                 {
+                
                     "name": "Fermo",
+                    
                     "average": 27.22222222222222,
+                    
                     "variance": 1049.9506172839506
+                    
                 },
+                
                 {
+                
                     "name": "Iesi",
+                    
                     "average": 42.27777777777778,
+                    
                     "variance": 1107.4228395061727
+                    
                 }
+                
             ]
+            
         }
+        
     ]
+    
 ]
 
 
