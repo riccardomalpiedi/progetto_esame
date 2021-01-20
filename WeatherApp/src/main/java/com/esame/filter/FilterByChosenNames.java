@@ -13,7 +13,7 @@ public class FilterByChosenNames extends FilterParent implements Filter {
 	/**
 	 * ArrayList di nomi
 	 */
-	public ArrayList<String> names;
+	private ArrayList<String> names;
 	
 	/**
 	 * Costruttore della classe FilterByChosenName
