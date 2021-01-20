@@ -6,7 +6,7 @@ import com.esame.model.City;
 import com.esame.model.Stats;
 
 /**
- * Classe StatsClounds estende StatsParent implementa StatsInterface
+ * Classe per il calcolo delle statistiche sulla nuvolosita' (estende StatsParent implementa StatsInterface)
  * @author Riccardo Malpiedi
  *
  */
@@ -14,14 +14,14 @@ public class StatsClouds extends StatsParent implements StatsInterface {
 	
 	/**
 	 * Costruttore della classe StatsClouds
-	 * @param arrayCities
+	 * @param arrayCities citta' di cui si vogliono calcolare le statistiche
 	 */
 	public StatsClouds(ArrayList<City> arrayCities) {
 		super(arrayCities);
 	}
 	
 	/**
-	 * Calcola le statistiche per la nuvolosita'
+	 * Implementa metodo per calcolare le statistiche della nuvolosita'
 	 * @return stats
 	 */
 	public Stats calculate() {

@@ -13,7 +13,7 @@ public class FilterDaily extends FilterByPeriod {
 	
 	/**
 	 * Costruttore di FilterDaily (imposta il periodo a 1)
-	 * @param arrayCities
+	 * @param arrayCities citta' da filtrare
 	 */
 	public FilterDaily(ArrayList<City> arrayCities) {
 		super(arrayCities);

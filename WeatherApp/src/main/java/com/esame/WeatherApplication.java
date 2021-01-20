@@ -17,7 +17,7 @@ public class WeatherApplication {
 	
 	/**
 	 * Metodo main
-	 * @param args
+	 * @param args argomenti
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(WeatherApplication.class, args);

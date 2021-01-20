@@ -18,8 +18,8 @@ public class FilterByPeriod extends FilterParent implements Filter {
 	
 	/**
 	 * Costruttore della classe period
-	 * @param arrayCities
-	 * @param period
+	 * @param arrayCities Citta' da filtrare
+	 * @param period periodo
 	 */
 	public FilterByPeriod(ArrayList<City> arrayCities, int period) {
 		super(arrayCities);
@@ -27,8 +27,8 @@ public class FilterByPeriod extends FilterParent implements Filter {
 	}
 	
 	/**
-	 * Costruttore della classe period
-	 * @param arrayCities
+	 * Secondo costruttore della classe period
+	 * @param arrayCities citta' da filtrare
 	 */
 	public FilterByPeriod(ArrayList<City> arrayCities) {
 		super(arrayCities);

@@ -24,9 +24,9 @@ public class Stats {
 	
 	/**
 	 * Costruttore classe Stats
-	 * @param name
-	 * @param average
-	 * @param variance
+	 * @param name nome
+	 * @param average media
+	 * @param variance varianza
 	 */
 	public Stats(String name, double average, double variance) {
 		this.name = name;
@@ -41,42 +41,42 @@ public class Stats {
 	
 	/**
 	 * Getter del nome della citta'
-	 * @return the name
+	 * @return name
 	 */
 	public String getName() {
 		return name;
 	}
 	/**
 	 * Setter del nome della citta'
-	 * @param name the name to set
+	 * @param name nome
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	/**
 	 * Getter della media
-	 * @return the average
+	 * @return average
 	 */
 	public double getAverage() {
 		return average;
 	}
 	/**
 	 * Setter della media
-	 * @param average the average to set
+	 * @param average media
 	 */
 	public void setAverage(double average) {
 		this.average = average;
 	}
 	/**
 	 * Getter della varianza
-	 * @return the variance
+	 * @return variance
 	 */
 	public double getVariance() {
 		return variance;
 	}
 	/**
 	 * Setter della varianza
-	 * @param variance the variance to set
+	 * @param variance varianza
 	 */
 	public void setVariance(double variance) {
 		this.variance = variance;

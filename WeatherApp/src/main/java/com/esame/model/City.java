@@ -38,11 +38,11 @@ public class City implements Comparable<City> {
 	/**
 	 * Costruttore della classe City
 	 * 
-	 * @param name
-	 * @param speed
-	 * @param deg
-	 * @param clouds
-	 * @param date
+	 * @param name nome
+	 * @param speed velocita'
+	 * @param deg angolazione del vento
+	 * @param clouds nuvolosita'
+	 * @param date date
 	 */
 	public City(String name, double speed, int deg, double clouds, LocalDateTime date) {
 		this.name = name;
@@ -55,7 +55,7 @@ public class City implements Comparable<City> {
 	/**
 	 * compareTo che confronta citta' in base alla data
 	 * 
-	 * @param city
+	 * @param city city
 	 */
 	@Override
 	public int compareTo(City city) {
@@ -102,7 +102,7 @@ public class City implements Comparable<City> {
 
 	/**
 	 * Setter del nome
-	 * @param name
+	 * @param name nome
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -118,7 +118,7 @@ public class City implements Comparable<City> {
 
 	/**
 	 * Setter della velocita' del vento
-	 * @param speed
+	 * @param speed velocita'
 	 */
 	public void setSpeed(double speed) {
 		this.speed = speed;
@@ -134,7 +134,7 @@ public class City implements Comparable<City> {
 
 	/**
 	 * Setter dell'angolazione del vento
-	 * @param deg
+	 * @param deg angolazione del vento
 	 */
 	public void setDeg(int deg) {
 		this.deg = deg;
@@ -150,7 +150,7 @@ public class City implements Comparable<City> {
 
 	/**
 	 * Setter della nuvolosita'
-	 * @param clouds
+	 * @param clouds nuvolosita'
 	 */
 	public void setClouds(double clouds) {
 		this.clouds = clouds;
@@ -166,7 +166,7 @@ public class City implements Comparable<City> {
 
 	/**
 	 * Setter della data
-	 * @param date
+	 * @param date data
 	 */
 	public void setDate(LocalDateTime date) {
 		this.date = date;

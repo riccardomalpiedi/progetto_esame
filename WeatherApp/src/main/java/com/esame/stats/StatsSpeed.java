@@ -6,21 +6,21 @@ import com.esame.model.City;
 import com.esame.model.Stats;
 
 /**
- * Classe StatsSpeed estende StatsParent implementa StatsInterface
+ * Classe per il calcolo delle statistiche sul vento (estende StatsParent implementa StatsInterface)
  * @author Riccardo Malpiedi
  */
 public class StatsSpeed extends StatsParent implements StatsInterface {
 	
 	/**
 	 * Costruttore della classe StatsSpeed
-	 * @param arrayCities
+	 * @param arrayCities citta' di cui calcore le statistiche
 	 */
 	public StatsSpeed(ArrayList<City> arrayCities) {
 		super(arrayCities);
 	}
 
 	/**
-	 * Calcola le statistiche della velocita' del vento
+	 * Implementa metodo per calcolare le statistiche della velocita' del vento
 	 * @return stats
 	 */
 	public Stats calculate() {

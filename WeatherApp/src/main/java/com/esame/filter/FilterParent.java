@@ -19,7 +19,7 @@ public class FilterParent {
 	
 	/**
 	 * Costruttore di FilterParent (ordina gli elemnti dati)
-	 * @param arrayCities
+	 * @param arrayCities citta' da filtrare
 	 */
 	public FilterParent(ArrayList<City> arrayCities) {
 		this.arrayCities = arrayCities;
@@ -28,7 +28,7 @@ public class FilterParent {
 	
 	/**
 	 * Getter di arrayCities
-	 * @return the arrayCities
+	 * @return arrayCities
 	 */
 	public ArrayList<City> getArrayCities() {
 		return arrayCities;
@@ -36,7 +36,7 @@ public class FilterParent {
 
 	/**
 	 * Setter di ArrayCities
-	 * @param arrayCities the arrayCities to set
+	 * @param arrayCities arrayCities
 	 */
 	public void setArrayCities(ArrayList<City> arrayCities) {
 		this.arrayCities = arrayCities;

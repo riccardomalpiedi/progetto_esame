@@ -13,7 +13,7 @@ public class FilterWeekly extends FilterByPeriod {
 	
 	/**
 	 * Costruttore di FilterWeekly (imposta il periodo a 7)
-	 * @param arrayCities
+	 * @param arrayCities citta' da filtrare
 	 */
 	public FilterWeekly(ArrayList<City> arrayCities) {
 		super(arrayCities);

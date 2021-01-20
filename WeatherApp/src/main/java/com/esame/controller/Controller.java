@@ -25,8 +25,8 @@ public class Controller {
 	@Autowired OpenWeatherService openWeatherService;
 	
 	/**
-	 * Rotta get per visualizzare dati attuali su vento e nuvolosita'
-	 * @param box di coordinate
+	 * Rotta GET per visualizzare dati attuali su vento e nuvolosita'
+	 * @param box box di coordinate
 	 * @return dati attuali su vento e nuvolosita'
 	 * @throws InvalidBoxException 
 	 */
@@ -36,7 +36,8 @@ public class Controller {
 	}
 	
 	/**
-	 * Rotta get per visualizzare le statistiche del tipo richiesto filtrate secondo la periodicita' richiesta
+	 * Rotta POST per visualizzare le statistiche del tipo richiesto filtrate secondo la periodicita' richiesta
+	 * calcolate sulle citta' specificate
 	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche periodiche
 	 * @throws InvalidTypeException 
@@ -49,7 +50,7 @@ public class Controller {
 	}
 	
 	/**
-	 * Rotta get per visualizzare le statistiche settimanali del tipo richiesto
+	 * Rotta POST per visualizzare le statistiche settimanali del tipo richiesto calcolate sulle citta' specificate
 	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche settimanali
 	 * @throws InvalidTypeException 
@@ -61,7 +62,7 @@ public class Controller {
 	}
 	
 	/**
-	 * Rotta get per visualizzare le statistiche giornaliere del tipo richiesto
+	 * Rotta POST per visualizzare le statistiche giornaliere del tipo richiesto calcolate sulle citta' specificate
 	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche giornaliere
 	 * @throws InvalidTypeException 
@@ -73,8 +74,8 @@ public class Controller {
 	}
 	
 	/**
-	 * Rotta post per cambiare il box di coordinate 
-	 * @param box
+	 * Rotta GET per cambiare il box di coordinate 
+	 * @param box box di coordinate
 	 * @return risposta sulla corretta esecuzione
 	 * @throws InvalidBoxException 
 	 */

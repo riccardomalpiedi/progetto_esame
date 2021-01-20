@@ -17,8 +17,8 @@ public class FilterByChosenNames extends FilterParent implements Filter {
 
 	/**
 	 * Costruttore della classe FilterByChosenName
-	 * @param arrayCities
-	 * @param names
+	 * @param arrayCities Citta' da filtrare
+	 * @param names nomi di città
 	 */
 	public FilterByChosenNames(ArrayList<City> arrayCities, ArrayList<String> names) {
 		super(arrayCities);

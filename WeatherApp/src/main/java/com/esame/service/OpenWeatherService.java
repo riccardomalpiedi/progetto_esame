@@ -71,7 +71,7 @@ public class OpenWeatherService {
 	}
 	
 	/**
-	 * Metodo che legge dati da storico, li filtra secondo la periodicita' indicata e
+	 * Metodo che legge dati da storico, applica i flitri richiesti e
 	 * calcola le statistiche del tipo richiesto
 	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche rischieste
@@ -123,7 +123,7 @@ public class OpenWeatherService {
 	}
 	
 	/**
-	 * Metodo che legge dati da storico e calcola statistiche settimanali del tipo richiesto
+	 * Metodo che legge dati da storico e calcola statistiche settimanali richieste
 	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche richieste
 	 * @throws InvalidTypeException 
@@ -165,7 +165,7 @@ public class OpenWeatherService {
 	}
 	
 	/**
-	 * Metodo che legge dati da storico e calcola statistiche giornaliere del tipo richiesto
+	 * Metodo che legge dati da storico e calcola statistiche giornaliere richieste
 	 * @param object JSONObject inserito dall'utente
 	 * @return statistiche richieste
 	 * @throws InvalidTypeException 
@@ -214,6 +214,8 @@ public class OpenWeatherService {
 	 */
 	public String changeBoxService(String box) throws InvalidBoxException {
 		String result = OpenWeatherUtils.API_Call(box);
+		if (result.equals("[]")) 
+			return "Box di coordinate non valido";
 		try {
 			JSONObject obj = (JSONObject) JSONValue.parseWithException(result);
 			if(obj.get("cod").toString().equals("200")) {

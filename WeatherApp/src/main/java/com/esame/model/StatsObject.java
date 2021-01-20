@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 public class StatsObject {
 	
 	/**
-	 * ArrayListv delle statistiche
+	 * ArrayList delle statistiche
 	 */
 	private ArrayList<Stats> arrayStats;
 	
@@ -29,7 +29,7 @@ public class StatsObject {
 	private String minCity;
 	
 	/**
-	 * Citta' con Varianza piu' alta
+	 * Citta' con la varianza piu' alta
 	 */
 	private String maxVarianceCity;
 	
@@ -45,9 +45,9 @@ public class StatsObject {
 	
 	/**
 	 * Costruttore della classe StatsObject
-	 * @param arrayStats
-	 * @param statsType
-	 * @param period
+	 * @param arrayStats statistiche
+	 * @param statsType tipo delle statistiche
+	 * @param period periodo
 	 */
 	public StatsObject(ArrayList<Stats> arrayStats, String statsType, String period) {
 		this.arrayStats = arrayStats;
@@ -90,84 +90,84 @@ public class StatsObject {
 	
 	/**
 	 * Getter di arrayStats
-	 * @return the arrayStats
+	 * @return arrayStats
 	 */
 	public ArrayList<Stats> getArrayStats() {
 		return arrayStats;
 	}
 	/**
 	 * Setter di arrayStats
-	 * @param arrayStats the arrayStats to set
+	 * @param arrayStats statistiche
 	 */
 	public void setArrayStats(ArrayList<Stats> arrayStats) {
 		this.arrayStats = arrayStats;
 	}
 	/**
 	 * Getter di maxCity
-	 * @return the maxCity
+	 * @return maxCity
 	 */
 	public String getMaxCity() {
 		return maxCity;
 	}
 	/**
 	 * Setter di maxCity
-	 * @param maxCity the maxCity to set
+	 * @param maxCity citta' con media piu' alta
 	 */
 	public void setMaxCity(String maxCity) {
 		this.maxCity = maxCity;
 	}
 	/**
 	 * Getter di minCity
-	 * @return the minCity
+	 * @return minCity
 	 */
 	public String getMinCity() {
 		return minCity;
 	}
 	/**
 	 * Setter di minCity
-	 * @param minCity the minCity to set
+	 * @param minCity citta' con media piu' bassa
 	 */
 	public void setMinCity(String minCity) {
 		this.minCity = minCity;
 	}
 	/**
 	 * Getter della citta' con varianza massima
-	 * @return the maxVarianceCity
+	 * @return maxVarianceCity
 	 */
 	public String getMaxVarianceCity() {
 		return maxVarianceCity;
 	}
 	/**
 	 * Setter della citta' con la varianza massima
-	 * @param maxVarianceCity the maxVarianceCity to set
+	 * @param maxVarianceCity citta' con varianza massima
 	 */
 	public void setMaxVarianceCity(String maxVarianceCity) {
 		this.maxVarianceCity = maxVarianceCity;
 	}
 	/**
 	 * Getter del tipo di stats
-	 * @return the statsType
+	 * @return statsType
 	 */
 	public String getStatsType() {
 		return statsType;
 	}
 	/**
 	 * Setter del tipo di stats
-	 * @param statsType the statsType to set
+	 * @param statsType tipo delle statistiche
 	 */
 	public void setStatsType(String statsType) {
 		this.statsType = statsType;
 	}
 	/**
 	 * Getter del periodo
-	 * @return the period
+	 * @return period
 	 */
 	public String getPeriod() {
 		return period;
 	}
 	/**
 	 * Setter del periodo
-	 * @param period the period to set
+	 * @param period periodo
 	 */
 	public void setPeriod(String period) {
 		this.period = period;
