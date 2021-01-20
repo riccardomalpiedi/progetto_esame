@@ -384,9 +384,24 @@ Questa rotta serve per cambiare il box di coordinate che indica le città da cui
 
 # Sequence diagram:
 
+Diagramma relativo alla rotta "/Data".
+
 ![s1](https://user-images.githubusercontent.com/75088977/103486070-5732a900-4dfb-11eb-8609-75b2262cdc61.png)
+
+
+Diagramma relativo alla rotta "/PeriodicalStats" con un JSONObject vuoto.
+
 ![seq2](https://user-images.githubusercontent.com/75088977/105095351-d2f04f00-5aa5-11eb-96c0-c6d940405b78.png)
+
+
+Diagramma relativo alla rotta "/PeriodicalStats" con un JSONObject che specifica il periodo.
+
 ![seq3](https://user-images.githubusercontent.com/75088977/105095354-d388e580-5aa5-11eb-9688-7bcfe6fd188d.png)
+
+
+Diagramma relativo alla rotta "/ChangeBox".
+
+![seq4](https://user-images.githubusercontent.com/75088977/105243544-7d807480-5b6f-11eb-83ae-3f32fd2dc25d.png)
 
 
 
