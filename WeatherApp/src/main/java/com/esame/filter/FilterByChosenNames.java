@@ -14,7 +14,7 @@ public class FilterByChosenNames extends FilterParent implements Filter {
 	 * ArrayList di nomi
 	 */
 	private ArrayList<String> names;
-	
+
 	/**
 	 * Costruttore della classe FilterByChosenName
 	 * @param arrayCities
@@ -40,5 +40,21 @@ public class FilterByChosenNames extends FilterParent implements Filter {
 			}
 		}
 		return arrayCitiesFiltered;	
+	}
+	
+	/**
+	 * Getter di names
+	 * @return the names
+	 */
+	public ArrayList<String> getNames() {
+		return names;
+	}
+
+	/**
+	 * Setter di names
+	 * @param names the names to set
+	 */
+	public void setNames(ArrayList<String> names) {
+		this.names = names;
 	}
 }

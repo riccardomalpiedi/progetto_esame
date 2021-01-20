@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.esame.controller"},{"l":"com.esame.exceptions"},{"l":"com.esame.filter"},{"l":"com.esame.model"},{"l":"com.esame.service"},{"l":"com.esame.stats"},{"l":"com.esame.WeatherApp"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.esame.filter"}]
