@@ -15,18 +15,18 @@ Di seguito è riportato un esempio.
 ![rotta_data](https://user-images.githubusercontent.com/75088977/104858086-18354500-591d-11eb-9fa6-88af5dc3688d.png)
 
 # POST statistiche periodiche (periodo scelto dall'utente) (/PeriodicalStats)
-Tramite questa rotta si ottengono le le statistiche (media e varianza) sulla velocità del vento e sulla nuvolosità delle città nello storico suddivise in base al periodo. L'utente dovrà fornire un Body sotto forma di JSONObject per filtrare i dati per tipo, per periodicità e per nome (si può anche inserire un JSONObject vuoto del tipo { }). Il tipo delle statistiche ("type") può essere specificato dall'utente e può essere "clouds" (per ottenere statistiche della nuvolosità), "wind" (per ottenere statistiche della velocità del vento) o "all" (per ottenere entrambe). Nel caso in cui il tipo non sia specificato verrà settato automaticamente su all.  La periodicità ("period) può essere specificata dall'utente ed è espressa in giorni (deve essere un intero). La periodicità può essere omessa se non si vogliono filtrare i dati per periodo. Si potrà inserire nel JSONObject un vettore di stringhe composto da un elenco di nomi di città chiamato "names" se si vogliono avere esclusivamente le statistiche di queste città. Nel caso in cui alcune delle città specificate non siano presenti nello storico il programma le ignorerà ma se tutte le città specificate non sono presenti nello storico verrà lanciata un'eccezione. Saranno specificate nella risposta la città con la media più alta, quella con la media più bassa e quella con la varianza massima. È anche specificato il range di tempo a cui fanno riferimento i dati e il tipo dei dati (nuvolosità o velocità del vento).
+Tramite questa rotta si ottengono le le statistiche (media e varianza) sulla velocità del vento e sulla nuvolosità delle città nello storico suddivise in base al periodo. L'utente dovrà fornire un Body sotto forma di JSONObject per filtrare i dati per tipo, per periodicità e per nome (si può anche inserire un JSONObject vuoto del tipo "{ }"). Il tipo delle statistiche ("type") può essere specificato dall'utente e può essere "clouds" (per ottenere statistiche della nuvolosità), "wind" (per ottenere statistiche della velocità del vento) o "all" (per ottenere entrambe). Nel caso in cui il tipo non sia specificato verrà settato automaticamente su "all".  La periodicità ("period") può essere specificata dall'utente ed è espressa in giorni (deve essere un intero). La periodicità può essere omessa se non si vogliono filtrare i dati per periodo. Si potrà inserire nel JSONObject un vettore di stringhe composto da un elenco di nomi di città chiamato "names" se si vogliono avere esclusivamente le statistiche di queste città. Nel caso in cui alcune delle città specificate non siano presenti nello storico il programma le ignorerà ma se tutte le città specificate non sono presenti nello storico verrà lanciata un'eccezione. Saranno specificate nella risposta la città con la media più alta, quella con la media più bassa e quella con la varianza massima. È anche specificato il range di tempo a cui fanno riferimento i dati e il tipo dei dati (nuvolosità o velocità del vento).
 Un esempio di tale chiamata:
 
 
 
-# POST statistiche giornaliere
+# POST statistiche giornaliere (/DailyStats)
 Tramite questa rotta si ottengono statistiche periodiche ma con periodicità fissata a 1 (non sarà quindi possibile specificarla). Nel Body si potranno specificare comunque il tipo delle statistiche e i nomi delle città come nella rotta "/PeriodicalStats".
 Un esempio di tale chiamata:
 
 
 
-# POST statistiche settimanali
+# POST statistiche settimanali (/WeeklyStats)
 Tramite questa rotta si ottengono statistiche periodiche ma con periodicità fissata a 7 (non sarà quindi necessario specificarla).  Nel Body si potranno specificare comunque il tipo delle statistiche e i nomi delle città come nella rotta "/PeriodicalStats".
 Un esempio di tale chiamata:
 
@@ -34,8 +34,6 @@ Un esempio di tale chiamata:
 
 # GET cambia box di coordinate
 Questa rotta serve per cambiare il box di coordinate che indica le città da cui raccogliere i dati per popolare lo storico. Si otterrà una risposta che confermerà la riuscita dell'operazione, altrimenti verrà lanciata un'eccezione. Il box dovrà essere scritto nella forma riportata nell'esempio.
-
-![rotta_ChangeBox2](https://user-images.githubusercontent.com/75088977/104858085-18354500-591d-11eb-8c00-c2a8f517c8b3.png)
 
 
 # Use case diagram:
