@@ -27,21 +27,13 @@ Una possibile risposta:
 [
 
     [
-    
         {
-        
-            "Città con media più alta": "Ancona",
-            
-            "Città con varianza massima": "Civitanova Marche",
-            
-            "Città con media più bassa": "Macerata",
-            
-            "tipo": "nuvolosità",
-            
-            "periodo": "da 2021-01-03T20:08:46 a 2021-01-20T20:09:56",
-            
-            "Statistiche": [
-            
+            "Città con media più alta": "Ancona",            
+            "Città con varianza massima": "Civitanova Marche",          
+            "Città con media più bassa": "Macerata",           
+            "tipo": "nuvolosità",         
+            "periodo": "da 2021-01-03T20:08:46 a 2021-01-20T20:09:56",           
+            "Statistiche": [          
                 {
                 
                     "name": "Osimo",
