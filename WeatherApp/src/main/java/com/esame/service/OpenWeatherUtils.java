@@ -138,7 +138,7 @@ public class OpenWeatherUtils {
 				StatsSpeed statsSpeed = new StatsSpeed(arrayCitiesFiltered);
 				Stats stats2 = statsSpeed.calculate();
 				stats2.setName(arrayCitiesFiltered.get(0).getName());
-				arrayStats2.add(stats);
+				arrayStats2.add(stats2);
 			}
 			StatsObject statsObject3 = new StatsObject(arrayStats, "nuvolosità", periodOfDatas);
 			jsonArrayStatsObjects.add(statsObject3.getJsonObject());
